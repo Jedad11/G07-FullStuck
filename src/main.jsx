@@ -10,6 +10,7 @@ import NavBar from "./component/NavBar";
 import "./index.css";
 import Footer from "./component/Footer";
 import Layout from "./layouts/Layout";
+import SignIn from "./component/SigninPopup";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path:"/signin",
+        element:<SignIn/>
       },
     ],
   },
