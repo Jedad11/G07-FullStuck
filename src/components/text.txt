@@ -1,2 +1,0 @@
-This folder for something we usually use like navbar
-this file can be delete

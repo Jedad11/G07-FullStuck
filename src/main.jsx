@@ -34,28 +34,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: '/',
-  //   element: <App/>,
-  //   children: [
-  //     {
-  //       path: '/home',
-  //       element: <HomePageLogin/>
-  //     },
-  //     {
-  //       path: '/condo',
-  //       element: <Condo/>
-  //     },
-  //     {
-  //       path: '/apartment',
-  //       element: <Apartment/>
-  //     },
-  //     {
-  //       path: '/contact',
-  //       element: <Contact/>
-  //     },
-  //   ],
-  // },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
