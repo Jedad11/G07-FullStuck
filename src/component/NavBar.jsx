@@ -3,9 +3,14 @@ import Logo from "../image/logorestrent.png";
 import { IoIosMenu } from "react-icons/io";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { NavLink, Link, Outlet } from "react-router-dom";
+import { useState } from "react";
+import SignIn from "./SigninPopup";
+import Signup from "./SignupPopup"
 
 const NavBar = () => {
   const [open, setOpen] = React.useState(false);
+  const [isSignInOpen ,setSignInOpen] = useState(false);
+  const [isSignUpOpen ,setSignUpOpen] = useState(false); 
   return (
     <>
       <div className="bg-[#362518] font-Inter py-4 px-6">
@@ -56,10 +61,12 @@ const NavBar = () => {
             </NavLink>
 
             <div className="relative hidden md:flex space-x-3">
-              <button className="SIGN_IN bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200">
+              <button className="SIGN_IN bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200" 
+              onClick={() => setSignInOpen(true)}>
                 Sign In
               </button>
-              <button className="SIGN_UP bg-transparent border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-[#ffedd5] hover:text-black">
+              <button className="SIGN_UP bg-transparent border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-[#ffedd5] hover:text-black"
+              onClick={() => setSignUpOpen(true)}>
                 Sign up
               </button>
             </div>
@@ -67,7 +74,9 @@ const NavBar = () => {
         </div>
       </div>
       <ResponsiveMenu open={open} />
-    </>
+      <SignIn isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} openSignUp={() => setSignUpOpen(true)} />
+      <Signup isOpen={isSignUpOpen}  onClose={() => setSignUpOpen(false)} openSignIn={() => setSignInOpen(true)}/>
+    </> 
   );
 };
 

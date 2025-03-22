@@ -9,11 +9,11 @@ import Contact from "./pages/Contact";
 import NavBar from "./component/NavBar";
 import "./index.css";
 import Footer from "./component/Footer";
-import Layout from "./layouts/Layout";
+import SignIn from "./component/SigninPopup";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // Layout หลักที่มี Navbar + Footer
+    element: <App/>,
     children: [
       { index: true, element: <HomePageLogin /> },
       {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path:"/signin",
+        element:<SignIn/>
       },
     ],
   },
