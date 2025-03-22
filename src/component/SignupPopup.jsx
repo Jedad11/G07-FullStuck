@@ -17,7 +17,7 @@ const SignUp = ({isOpen, onClose, openSignIn}) => {
     }
     
     return(
-            <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50">
+            <div className="fixed inset-0 bg-[rgba(128,128,128,0.25)] backdrop-blur-md flex justify-center items-center z-50">
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.8 }} 
                     animate={{ opacity: 1, scale: 1 }} 
