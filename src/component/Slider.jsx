@@ -1,6 +1,4 @@
 import React from "react";
-import Kmutt1 from "../image/kmutt1.jpg";
-import Kmutt2 from "../image/kmutt2.jpg";
 import Kmutt3 from "../image/kmutt3.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import Swiper CSS

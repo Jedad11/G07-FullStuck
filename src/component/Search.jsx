@@ -3,12 +3,21 @@ import CheckIn from "./CheckIn";
 import CheckOut from "./CheckOut";
 import {AiOutlineSearch} from 'react-icons/ai'
 const Search = () => {
-    const [activeSearch, setActiveSearch] = useState(false)
+    const [activeSearch, setActiveSearch] = useState([])
+
+    const handleSearch = (e) => {
+        if(e.target.value == ''){
+            setActiveSearch([])
+            return false;
+        }
+        setActiveSearch(words.filter(w => w.includes(e.target.value)).slice(0,8))
+
+    }
   return (
     // <div className="h-[150px] w-[300px] items-center justify-center bg-white p-4 lg:h-[80px] lg:w-full">
     //   <div className="flex flex-col w-full h-full lg:flex-row gap-6 items-center">
     //     <div className="flex-1 lg:border-r">
-    //       <CheckIn />
+    //       <CheckIn /> 
     //     </div>
     //     <div className="flex-1 lg:border-r">
     //       <CheckOut />
