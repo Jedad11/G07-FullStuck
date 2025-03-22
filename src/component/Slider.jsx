@@ -6,16 +6,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import Swiper CSS
 import "swiper/css/effect-fade"; // Import EffectFade CSS
 // import { EffectFade, Autoplay } from "swiper"; 
-
+import Kmutt10 from "../image/kmutt10.webp"
+import Kmutt11 from "../image/kmutt11.jpg"
 
 const slides = [
   {
     title: "The Best Booking KMUTT DORM Website",
-    bg: Kmutt1,
+    bg: Kmutt10,
   },
   {
     title: "The Best Booking KMUTT DORM Website",
-    bg: Kmutt2,
+    bg: Kmutt11,
   },
   {
     title: "The Best Booking KMUTT DORM Website",

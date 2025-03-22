@@ -2,20 +2,28 @@ import React from "react";
 import Slider from "../component/Slider";
 import Search from "../component/Search";
 import Room1 from "../image/room1.jpg";
-import Room2 from "../image/room2.jpg"
+import Room2 from "../image/room2.jpg";
 import RecommendationRoom from "../component/RecommendationRoom";
 
 function HomePageLogin() {
   return (
     <>
       <Slider />
-      <div className="container mx-auto">
-        <div className=" bg-[#F3EAD3] mt-6 p-4 lg:shadow-xl absolute lg:left-0 lg:right-0 lg:z-30 lg:top-110">
+      {/* <div className=" bg-[#F3EAD3] mt-2 p-7  shadow-xl absolute top-110">
           <Search />
+        </div> */}
+      {/* <div className="container mx-auto flex justify-center ">
+        <div className=" bg-[#F3EAD3] mt-3 p-7 w-full max-w-7xl flex justify-between items-center lg:shadow-xl absolute md:z-30 lg:top-110">
+          <Search />
+        </div>
+      </div> */}
+      <div className="container mx-auto flex justify-center rounded-xl ">
+        <div className="bg-[#F3EAD3] mt-3 p-7 w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center lg:shadow-xl absolute md:z-30 lg:top-110 md:flex-row  ">
+          <Search /> 
         </div>
       </div>
 
-      <section className="container mx-auto py-20 px-4 text-center text-[#362518]">
+      <section className="mt-20 sm:mt-30 container mx-auto py-20 px-4 text-center text-[#362518] lg:mt-5">
         <h2 className="text-4xl font-bold mb-6">Welcome to KMUTT Res|Rent</h2>
         <p className="text-lg mb-8">
           Platform for finding quality residences near King Mongkut's University
@@ -63,7 +71,7 @@ function HomePageLogin() {
         </div>
       </section>
 
-      <RecommendationRoom/>
+      <RecommendationRoom />
     </>
   );
 }
