@@ -7,13 +7,17 @@ import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./component/Footer";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <NavBar />
-      <Footer/>
-    </>
+    <div>
+        <NavBar/>
+        <main>
+            <Outlet/>
+        </main>
+        <Footer/>
+    </div>
   );
 }
 

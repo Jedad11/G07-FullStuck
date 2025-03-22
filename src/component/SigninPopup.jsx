@@ -1,14 +1,23 @@
 import React from "react";
 import {motion} from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
+import { useState } from "react";
+import SignUp from "./SignupPopup";
 
-const SignIn = ({isOpen, onClose}) => {
+const SignIn = ({isOpen, onClose, openSignUp}) => {
+    const [isSignUp,setSignUp] = useState(false);
+
+    const handleRegisterClick = () => {
+        onClose(); // Close the SignIn modal
+        openSignUp();// Open the SignUp modal
+    };
+
     if(!isOpen){
         return null;
     }
 
     return(
-        <div className="inset-0 bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50">
             <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }} 
                 animate={{ opacity: 1, scale: 1 }} 
@@ -32,9 +41,10 @@ const SignIn = ({isOpen, onClose}) => {
             </div>
             <div className="flex mt-5">
                 <p className="">Don't have an account yet?</p>
-                <p className="ml-1 font-bold underline">Register for free</p>
+                <p className="ml-1 font-bold underline" onClick={handleRegisterClick}>Register for free</p>
             </div>
             </motion.div>
+            <SignUp isOpen={isSignUp} onClose={() => setSignUp(false)}/>
         </div>
     );
 }
