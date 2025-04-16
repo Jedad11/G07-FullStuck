@@ -8,11 +8,15 @@ import Contact from "./pages/Contact";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./component/Footer";
 import { Outlet } from "react-router-dom";
+import NavBarLogin from "./component/NavbarLogin";
 
-function App() {
+
+function App({onLogIn}) {
+
+
   return (
     <div>
-        <NavBar/>
+        <NavBar />
         <main>
             <Outlet/>
         </main>

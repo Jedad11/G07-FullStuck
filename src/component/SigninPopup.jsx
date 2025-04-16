@@ -3,13 +3,21 @@ import {motion} from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import SignUp from "./SignupPopup";
+import App from "../App";
 
 const SignIn = ({isOpen, onClose, openSignUp}) => {
     const [isSignUp,setSignUp] = useState(false);
+    const [isLogIn, setLogIn] = useState(false);
 
     const handleRegisterClick = () => {
         onClose(); // Close the SignIn modal
         openSignUp();// Open the SignUp modal
+    };
+
+    const handleLogin = () => {
+        onClose();
+        setLogIn(true);
+        
     };
 
     if(!isOpen){
@@ -37,7 +45,7 @@ const SignIn = ({isOpen, onClose, openSignUp}) => {
                 <p className="mb-1">Password</p>
                 <input type="password" name="password" placeholder="Password" className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"/>
                 <p className="m-2 underline">Forget Password?</p>
-                <button className="bg-[#362518] text-white p-3 rounded-lg">Sign In</button>
+                <button className="bg-[#362518] text-white p-3 rounded-lg" onClick={handleLogin}>Sign In</button>
             </div>
             <div className="flex mt-5">
                 <p className="">Don't have an account yet?</p>
