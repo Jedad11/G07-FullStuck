@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const rooms = [
   {
@@ -71,9 +72,11 @@ const RecommendationRoom = () => {
         ))}
       </div>
       <div className="text-center mt-8">
-        <button className="bg-[#362518] text-white px-6 py-2 rounded-md hover:bg-brown-700 transition-all">
-          View More
-        </button>
+        <NavLink to='/recommend'>
+          <button className="bg-[#362518] text-white px-6 py-2 rounded-md hover:bg-brown-700 transition-all">
+            View More
+          </button>
+        </NavLink>
       </div>
     </div>
   );
