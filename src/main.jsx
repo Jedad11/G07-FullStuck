@@ -10,6 +10,8 @@ import NavBar from "./component/NavBar";
 import "./index.css";
 import Footer from "./component/Footer";
 import SignIn from "./component/SigninPopup";
+import Recommend from "./pages/Recommend";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:"/signin",
         element:<SignIn/>
+      },
+      {
+        path:"/recommend",
+        element:<Recommend/>
       },
     ],
   },
