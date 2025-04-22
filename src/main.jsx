@@ -6,11 +6,10 @@ import HomePageLogin from "./pages/HomePageLogin";
 import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
-import NavBar from "./component/NavBar";
 import "./index.css";
-import Footer from "./component/Footer";
 import SignIn from "./component/SigninPopup";
-import Recommend from "./pages/Recommend";
+import Writereview from "./pages/Writereview";
+import { ThemeProvider } from "@material-tailwind/react";
 
 const router = createBrowserRouter([
   {
@@ -34,16 +33,18 @@ const router = createBrowserRouter([
         path:"/signin",
         element:<SignIn/>
       },
-      {
-        path:"/recommend",
-        element:<Recommend/>
-      },
     ],
   },
+  {
+    path: "/review",
+    element: <Writereview/>
+  }
 ]);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <ThemeProvider>
     <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>
-  //hello
 );
