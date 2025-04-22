@@ -9,12 +9,14 @@ import Contact from "./pages/Contact";
 // import ResidentDetail from "./pages/ResidentDetail";
 import NavBar from "./component/NavBar";
 import "./index.css";
-import Footer from "./component/Footer";
-import Layout from "./layouts/Layout";
+import SignIn from "./component/SigninPopup";
+import Writereview from "./pages/Writereview";
+import { ThemeProvider } from "@material-tailwind/react";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // Layout หลักที่มี Navbar + Footer
+    element: <App/>,
     children: [
       { index: true, element: <HomePageLogin /> },
       {
@@ -58,8 +60,22 @@ const router = createBrowserRouter([
   //   ],
   // },
 ]);
+      {
+        path:"/signin",
+        element:<SignIn/>
+      },
+    ],
+  },
+  {
+    path: "/review",
+    element: <Writereview/>
+  }
+]);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <ThemeProvider>
     <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>
 );
