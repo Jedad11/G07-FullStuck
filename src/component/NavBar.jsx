@@ -35,7 +35,7 @@ const NavBar = () => {
             <IoIosMenu className="text-5xl cursor-pointer text-white" />
           </div>
 
-          <div className="hidden md:flex space-x-6 text-lg items-center justify-center gap-2 font-medium text-stone-300">
+          <div className="hidden md:flex space-x-6 text-lg items-center justify-center gap-2 font-medium text-stone-300 ">
             <NavLink to='/'
               className=" hover:text-white hover:border-b-2 border-[#ffedd5] cursor-pointer transition-all"
             >
