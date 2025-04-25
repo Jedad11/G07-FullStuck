@@ -6,7 +6,7 @@ import HomePageLogin from "./pages/HomePageLogin";
 import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
-// import ResidentDetail from "./pages/ResidentDetail";
+import ResidentDetail from "./pages/ResidentDetail";
 import NavBar from "./component/NavBar";
 import "./index.css";
 import SignIn from "./component/SigninPopup";
@@ -16,59 +16,22 @@ import { ThemeProvider } from "@material-tailwind/react";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     children: [
       { index: true, element: <HomePageLogin /> },
-      {
-        path: "/condo",
-        element: <Condo />,
-      },
-      {
-        path: "/apartment",
-        element: <Apartment />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/ResidentDetail",
-        element: <ResidentDetail />,
-      },
-    ],
-  },
-  // {
-  //   path: '/',
-  //   element: <App/>,
-  //   children: [
-  //     {
-  //       path: '/home',
-  //       element: <HomePageLogin/>
-  //     },
-  //     {
-  //       path: '/condo',
-  //       element: <Condo/>
-  //     },
-  //     {
-  //       path: '/apartment',
-  //       element: <Apartment/>
-  //     },
-  //     {
-  //       path: '/contact',
-  //       element: <Contact/>
-  //     },
-  //   ],
-  // },
-]);
-      {
-        path:"/signin",
-        element:<SignIn/>
-      },
+      { path: "condo", element: <Condo /> },
+      { path: "apartment", element: <Apartment /> },
+      { path: "contact", element: <Contact /> },
+      { path: "ResidentDetail", element: <ResidentDetail /> },
     ],
   },
   {
+    path: "/signin",
+    element: <SignIn />,
+  },
+  {
     path: "/review",
-    element: <Writereview/>
+    element: <Writereview />,
   }
 ]);
 
