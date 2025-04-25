@@ -25,7 +25,7 @@ const NavBar = () => {
   const [isSignUpOpen, setSignUpOpen] = useState(false);
   const { isAuth, unAuth } = useContext(ThemeContext);
   const [isOpen, setisOpen] = useState(false);
-
+  //ccc
   const Menus = ["Accout Setting", "Logout"];
   return (
     <>

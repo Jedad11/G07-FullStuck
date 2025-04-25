@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function AccountSetting() {
+  //c
   return (
     <div className="bg-[#F3EAD3] min-h-svh">
       <div className="min-h-screen bg-[#F3EAD3] text-white flex items-center justify-center p-4">
@@ -83,7 +84,7 @@ export default function AccountSetting() {
               />
             </div>
           </form>
-  
+
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-[#2A1B13] text-white px-6 py-2 rounded-md">
               Save Change

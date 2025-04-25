@@ -6,7 +6,7 @@ const ThemeProviderContext = ({ children }) => {
     const [isAuth, setAuth] = useState(false)
 
     const unAuth = () => setAuth(false);
-
+    //c
     return (
       <ThemeContext.Provider value={{ isAuth, setAuth, unAuth }}>
         {children}

@@ -25,7 +25,7 @@ const SignIn = ({isOpen, onClose, openSignUp}) => {
     if(!isOpen){
         return null;
     }
-
+    //c
     return(
         <div className="fixed inset-0 bg-[rgba(128,128,128,0.25)] backdrop-blur-md flex justify-center items-center z-50">
             <motion.div 

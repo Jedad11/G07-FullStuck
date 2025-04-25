@@ -8,7 +8,6 @@ const Sort = () => {
         setSort(type);
         setIsOpen(false);
     }
-
     return (
         <div className="flex items-center mb-2 relative gap-2 justify-end mr-10">
             <div>
