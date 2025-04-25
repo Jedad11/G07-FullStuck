@@ -6,17 +6,20 @@ import HomePageLogin from "./pages/HomePageLogin";
 import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
-// import ResidentDetail from "./pages/ResidentDetail";
+import ResidentDetail from "./pages/ResidentDetail";
 import NavBar from "./component/NavBar";
 import "./index.css";
-import SignIn from "./component/SigninPopup";
+
 import Writereview from "./pages/Writereview";
 import { ThemeProvider } from "@material-tailwind/react";
+import { ThemeProviderContext } from "./contexts/auth";
+import AccountSetting from "./component/AccoutSetting";
+//c
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     children: [
       { index: true, element: <HomePageLogin /> },
       {
@@ -31,41 +34,32 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path:"/ResidentDetail",
+        element: <ResidentDetail />,
+      },
     ],
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
   },
   {
     path: "/review",
     element: <Writereview/>
-  }
-  // {
-  //   path: '/',
-  //   element: <App/>,
-  //   children: [
-  //     {
-  //       path: '/home',
-  //       element: <HomePageLogin/>
-  //     },
-  //     {
-  //       path: '/condo',
-  //       element: <Condo/>
-  //     },
-  //     {
-  //       path: '/apartment',
-  //       element: <Apartment/>
-  //     },
-  //     {
-  //       path: '/contact',
-  //       element: <Contact/>
-  //     },
-  //   ],
-  // },
+  },
+  {
+    path: "/mock",
+    element: <AccountSetting/>
+  },
 ]);
-  
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
-    <RouterProvider router={router} />
+      <ThemeProviderContext>
+        <RouterProvider router={router} />
+      </ThemeProviderContext>
     </ThemeProvider>
   </StrictMode>
 );
