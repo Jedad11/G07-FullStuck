@@ -1,21 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../image/logorestrent.png";
 import { IoIosMenu } from "react-icons/io";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { NavLink, Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import SignIn from "./SigninPopup";
-import Signup from "./SignupPopup"
+import Signup from "./SignupPopup";
+import { ThemeContext } from "../contexts/auth";
+import { FaUserCircle } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { CircleUser } from "lucide-react";
 
 const NavBar = () => {
   const [open, setOpen] = React.useState(false);
-  const [isSignInOpen ,setSignInOpen] = useState(false);
-  const [isSignUpOpen ,setSignUpOpen] = useState(false); 
+  const [isSignInOpen, setSignInOpen] = useState(false);
+  const [isSignUpOpen, setSignUpOpen] = useState(false);
+  const { isAuth, unAuth } = useContext(ThemeContext);
+  const [isOpen, setisOpen] = useState(false);
+  //ccc
+  const Menus = ["Accout Setting", "Logout"];
   return (
     <>
       <div className="bg-[#362518] font-Inter py-4 px-6">
         <div className="flex w-full max-w-7xl justify-between items-center mx-auto ">
-          <NavLink to='/' >
+          <NavLink to="/">
             <div className="flex items-center space-x-0">
               <img
                 src={Logo}
@@ -35,48 +51,89 @@ const NavBar = () => {
             <IoIosMenu className="text-5xl cursor-pointer text-white" />
           </div>
 
-          <div className="hidden md:flex space-x-6 text-lg items-center justify-center gap-2 font-medium text-stone-300 ">
-            <NavLink to='/'
+          <div className="hidden md:flex space-x-6 text-lg items-center justify-center gap-2 font-medium text-gray-100">
+            <NavLink
+              to="/"
               className=" hover:text-white hover:border-b-2 border-[#ffedd5] cursor-pointer transition-all"
             >
               Home
             </NavLink>
 
-            <NavLink to='/condo'
+            <NavLink
+              to="/condo"
               className=" hover:text-white hover:border-b-2 border-[#ffedd5] cursor-pointer transition-all"
             >
               Condo
             </NavLink>
 
-            <NavLink to='/apartment'
+            <NavLink
+              to="/apartment"
               className=" hover:text-white hover:border-b-2 border-[#ffedd5] cursor-pointer transition-all"
             >
               Apartment
             </NavLink>
 
-            <NavLink to='/contact'
-              className=" hover:text-white hover:border-b-2 border-[#ffedd5] cursor-pointer transition-all"
-            >
-              Contact
-            </NavLink>
+            {isAuth ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full hidden md:flex"
+                  >
+                    <CircleUser className="h-5 w-5" />
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
 
-            <div className="relative hidden md:flex space-x-3">
-              <button className="SIGN_IN bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200" 
-              onClick={() => setSignInOpen(true)}>
-                Sign In
-              </button>
-              <button className="SIGN_UP bg-transparent border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-[#ffedd5] hover:text-black"
-              onClick={() => setSignUpOpen(true)}>
-                Sign up
-              </button>
-            </div>
+                  <Link to={"user/auth/dashboard/1"}>
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                  </Link>
+
+                  <DropdownMenuItem
+                    onClick={() => {
+                      dispatch(logoutStatus({ isAuthenticated: false }));
+                      navigate("/");
+                    }}
+                  >
+                    <Link >Log out</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="relative hidden md:flex space-x-3">
+                <button
+                  className="SIGN_IN bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-200"
+                  onClick={() => setSignInOpen(true)}
+                >
+                  Sign In
+                </button>
+                <button
+                  className="SIGN_UP bg-transparent border-2 border-white text-white py-2 px-4 rounded-lg hover:bg-[#ffedd5] hover:text-black"
+                  onClick={() => setSignUpOpen(true)}
+                >
+                  Sign up
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
       <ResponsiveMenu open={open} />
-      <SignIn isOpen={isSignInOpen} onClose={() => setSignInOpen(false)} openSignUp={() => setSignUpOpen(true)} />
-      <Signup isOpen={isSignUpOpen}  onClose={() => setSignUpOpen(false)} openSignIn={() => setSignInOpen(true)}/>
-    </> 
+      <SignIn
+        isOpen={isSignInOpen}
+        onClose={() => setSignInOpen(false)}
+        openSignUp={() => setSignUpOpen(true)}
+      />
+      <Signup
+        isOpen={isSignUpOpen}
+        onClose={() => setSignUpOpen(false)}
+        openSignIn={() => setSignInOpen(true)}
+      />
+    </>
   );
 };
 

@@ -9,14 +9,6 @@ function HomePageLogin() {
   return (
     <>
       <Slider />
-      {/* <div className=" bg-[#F3EAD3] mt-2 p-7  shadow-xl absolute top-110">
-          <Search />
-        </div> */}
-      {/* <div className="container mx-auto flex justify-center ">
-        <div className=" bg-[#F3EAD3] mt-3 p-7 w-full max-w-7xl flex justify-between items-center lg:shadow-xl absolute md:z-30 lg:top-110">
-          <Search />
-        </div>
-      </div> */}
       <div className="container mx-auto flex justify-center rounded-xl ">
         <div className="bg-[#F3EAD3] mt-3 p-7 w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center lg:shadow-xl absolute md:z-30 lg:top-110 md:flex-row  ">
           <Search /> 
