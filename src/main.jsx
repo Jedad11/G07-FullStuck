@@ -6,7 +6,7 @@ import HomePageLogin from "./pages/HomePageLogin";
 import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
-import ResidentDetail from "./pages/ResidentDetail";
+// import ResidentDetail from "./pages/ResidentDetail";
 import NavBar from "./component/NavBar";
 import "./index.css";
 
@@ -34,16 +34,16 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path:"/ResidentDetail",
-        element: <ResidentDetail />,
-      },
+      // {
+      //   path:"/ResidentDetail",
+      //   element: <ResidentDetail />,
+      // },
     ],
   },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
+  // {
+  //   path: "/signin",
+  //   element: <SignIn />,
+  // },
   {
     path: "/review",
     element: <Writereview/>

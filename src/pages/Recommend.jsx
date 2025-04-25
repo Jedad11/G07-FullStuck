@@ -12,11 +12,11 @@ function Recommend() {
       <br />King Mongkut's University of Technology Thonburi</h1>
       <div className="h-px bg-gray-300 my-4" />
       <Sort/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
+      <Card Name="A" Floor="8" Price="8,500"/>
+      <Card Name="B" Floor="10" Price="10,500"/>
+      <Card Name="C" Floor="9" Price="4,000"/>
+      <Card Name="D" Floor="8" Price="5,600"/>
+      <Card Name="E" Floor="5" Price="2,000"/>
     </div>
   )
 }

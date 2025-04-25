@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Back = () => {
     return(
         <NavLink to='/' >
-            <button className="border border-[#BCBEC0] text-[#747474] pr-[28px] pl-[28px] pt-[16px] pb-[16px] m-2" >Go Back</button>
+            <button className="border border-[#BCBEC0] text-[#747474] lg:text-[24px] md:text-[18px] font-medium pr-2 pl-2 pt-1 pb-1 m-2" >Go Back</button>
         </NavLink>
     )
 }
