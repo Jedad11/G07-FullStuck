@@ -1,13 +1,14 @@
-import React from "react";
 import {motion} from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
-import { useState } from "react";
 import SignUp from "./SignupPopup";
 import App from "../App";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../contexts/auth";
 
 const SignIn = ({isOpen, onClose, openSignUp}) => {
     const [isSignUp,setSignUp] = useState(false);
     const [isLogIn, setLogIn] = useState(false);
+    const {isAuth, setAuth} = useContext(ThemeContext)
 
     const handleRegisterClick = () => {
         onClose(); // Close the SignIn modal
@@ -17,6 +18,7 @@ const SignIn = ({isOpen, onClose, openSignUp}) => {
     const handleLogin = () => {
         onClose();
         setLogIn(true);
+        setAuth(true)
         
     };
 

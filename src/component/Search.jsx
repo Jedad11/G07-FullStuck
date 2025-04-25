@@ -15,7 +15,7 @@ const Search = () => {
     }
   return (
 
-    <form className="w-full relative">
+    <form className="z-10 w-full relative">
       <div className="relative">
         <input 
         type="serch"

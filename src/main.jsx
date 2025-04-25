@@ -7,9 +7,12 @@ import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
 import "./index.css";
-import SignIn from "./component/SigninPopup";
+
 import Writereview from "./pages/Writereview";
 import { ThemeProvider } from "@material-tailwind/react";
+import { ThemeProviderContext } from "./contexts/auth";
+import AccountSetting from "./component/AccoutSetting";
+
 
 const router = createBrowserRouter([
   {
@@ -29,22 +32,24 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path:"/signin",
-        element:<SignIn/>
-      },
     ],
   },
   {
     path: "/review",
     element: <Writereview/>
+  },
+  {
+    path: "/mock",
+    element: <AccountSetting/>
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
-    <RouterProvider router={router} />
+      <ThemeProviderContext>
+        <RouterProvider router={router} />
+      </ThemeProviderContext>
     </ThemeProvider>
   </StrictMode>
 );
