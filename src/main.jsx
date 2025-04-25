@@ -31,12 +31,12 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path: "/ResidentDetail",
-        element: <ResidentDetail />,
-      },
     ],
   },
+  {
+    path: "/review",
+    element: <Writereview/>
+  }
   // {
   //   path: '/',
   //   element: <App/>,
@@ -60,17 +60,7 @@ const router = createBrowserRouter([
   //   ],
   // },
 ]);
-      {
-        path:"/signin",
-        element:<SignIn/>
-      },
-    ],
-  },
-  {
-    path: "/review",
-    element: <Writereview/>
-  }
-]);
+  
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
