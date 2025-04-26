@@ -1,8 +1,11 @@
-import React, { useRef ,useState} from "react";
+import React, { useRef, useState} from "react";
 import { NavLink } from "react-router";
-export default function AccountSetting() {
+
+
+const AccountSetting = () => {
   const fileInputRef = useRef(null);
-  const [firstName, setFirstName] = useState("");
+
+    const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
@@ -20,6 +23,7 @@ export default function AccountSetting() {
 
   const handleFileChange = () => {
     const file = e.target.files[0];
+
   };
   return (
     <div className="bg-[#F3EAD3] min-h-svh">
@@ -145,3 +149,5 @@ export default function AccountSetting() {
     </div>
   );
 }
+
+export default AccountSetting;

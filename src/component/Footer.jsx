@@ -77,29 +77,8 @@ const Footer = () => {
             Apartment
           </NavLink>
           <br />
-          <NavLink
-            to="/contact"
-            className=" hover:text-white hover:border-b-2 border-[#ffedd5] cursor-pointer transition-all"
-          >
-            Contact
-          </NavLink>
         </div>
 
-        <div className="mt-5">
-          <h2 className="font-semibold text-lg mb-4">Blog</h2>
-          <ul className="space-y-2">
-            <li>
-              <NavLink to="/" className="hover:underline">
-                About us
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact" className="hover:underline">
-                Contact us
-              </NavLink>
-            </li>
-          </ul>
-        </div>
 
         <div className="p-4 mt-2 ">
           <h2 className="font-semibold text-lg mb-4">Follow Us</h2>
