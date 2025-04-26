@@ -89,7 +89,7 @@ const NavBar = () => {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
 
-                  <Link to={"user/auth/dashboard/1"}>
+                  <Link to="/mock">
                     <DropdownMenuItem>Profile</DropdownMenuItem>
                   </Link>
 
@@ -99,7 +99,7 @@ const NavBar = () => {
                       navigate("/");
                     }}
                   >
-                    <Link >Log out</Link>
+                    <Link>Log out</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
