@@ -18,7 +18,6 @@ function Condo() {
         <Card Name="D" Floor="8" Price="5,600" className="hidden xl:block" />
         <Card Name="E" Floor="5" Price="2,000" className="hidden xl:block" />
       </div>
-
     </div>
   )
 }
