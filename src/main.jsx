@@ -34,16 +34,16 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path:"/ResidentDetail",
-        element: <ResidentDetail />,
-      },
+      // {
+      //   path:"/ResidentDetail",
+      //   element: <ResidentDetail />,
+      // },
     ],
   },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
+  // {
+  //   path: "/signin",
+  //   element: <SignIn />,
+  // },
   {
     path: "/review",
     element: <Writereview/>
