@@ -13,8 +13,8 @@ const SignIn = ({ isOpen, onClose, openSignUp }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRegisterClick = () => {
-    onClose(); // Close the SignIn modal
-    openSignUp(); // Open the SignUp modal
+    onClose(); // Close the SignIn
+    openSignUp(); // Open the SignUp
   };
   const {
     register,

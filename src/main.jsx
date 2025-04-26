@@ -6,7 +6,7 @@ import HomePageLogin from "./pages/HomePageLogin";
 import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
-// import ResidentDetail from "./pages/ResidentDetail";
+import ResidentDetail from "./pages/ResidentDetail";
 import NavBar from "./component/NavBar";
 import "./index.css";
 
@@ -15,6 +15,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
 import Booking from "./pages/Booking";
+import Recommend from "./pages/Recommend";
 //c
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
         path: "/booking",
         element: <Booking/>
       },
+      ,{
+        path: "/recommend",
+        element: <Recommend/>
+      }
     ],
   },
   // {

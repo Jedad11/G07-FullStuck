@@ -30,9 +30,9 @@ const NavBar = () => {
   const [isLogOutOpen, setLogOutOpen] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
-    unAuth(); // เปลี่ยนสถานะ Auth เป็น false
-    setLogOutOpen(false); // ปิด Popup
-    navigate("/"); // ย้ายกลับหน้า Home
+    unAuth();
+    setLogOutOpen(false); // Close Popup
+    navigate("/"); // Back to HomePage
   };
   //ccc
   const Menus = ["Accout Setting", "Logout"];
@@ -128,11 +128,11 @@ const NavBar = () => {
         </div>
       </div>
       <ResponsiveMenu
-      open={open}
-      openSignIn={() => setSignInOpen(true)}
-      openSignUp={() => setSignUpOpen(true)}
-      onClose={() => setOpen(false)}
-    />
+        open={open}
+        openSignIn={() => setSignInOpen(true)}
+        openSignUp={() => setSignUpOpen(true)}
+        onClose={() => setOpen(false)}
+      />
 
       <SignIn
         isOpen={isSignInOpen}

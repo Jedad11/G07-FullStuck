@@ -14,7 +14,6 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordAgin, setShowPasswordAgain] = useState(false);
 
-//   const {password, error} = useSelector((state) => state.validate)
   const {
     register,
     handleSubmit,
@@ -31,8 +30,8 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
     }
   });
   const handleSignInClick = () => {
-    onClose(); // Close the SignIn modal
-    openSignIn(); // Open the SignUp modal
+    onClose(); // Close the SignIn
+    openSignIn(); // Open the SignUp
   };
   if (!isOpen) {
     return null;
@@ -61,7 +60,6 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
               <h2 className="text-xl text-[#362518] font-bold">
                 Register your account
               </h2>
-              {/* <p className="text-[#362518] font-semibold">Login into your account</p> */}
             </div>
             <div className="flex flex-col">
               <div className="flex">
