@@ -15,6 +15,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
 import LogoutPopup from "./component/LogoutPopup"
+import Recommend from "./pages/Recommend";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/recommend",
+        element:<Recommend/>
+      }
       // {
       //   path:"/ResidentDetail",
       //   element: <ResidentDetail />,

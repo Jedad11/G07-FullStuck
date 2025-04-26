@@ -127,7 +127,13 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <ResponsiveMenu open={open} />
+      <ResponsiveMenu
+      open={open}
+      openSignIn={() => setSignInOpen(true)}
+      openSignUp={() => setSignUpOpen(true)}
+      onClose={() => setOpen(false)}
+    />
+
       <SignIn
         isOpen={isSignInOpen}
         onClose={() => setSignInOpen(false)}
