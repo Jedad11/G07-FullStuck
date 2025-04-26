@@ -14,7 +14,7 @@ import Writereview from "./pages/Writereview";
 import { ThemeProvider } from "@material-tailwind/react";
 import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
-//c
+import LogoutPopup from "./component/LogoutPopup"
 
 const router = createBrowserRouter([
   {
@@ -51,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/mock",
     element: <AccountSetting/>
+  },
+  {
+    path: "/logout",
+    element: <LogoutPopup/>
   },
 ]);
 

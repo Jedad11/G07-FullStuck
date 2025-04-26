@@ -3,15 +3,11 @@ import CheckIn from "./CheckIn";
 import CheckOut from "./CheckOut";
 import {AiOutlineSearch} from 'react-icons/ai'
 const Search = () => {
-    const [activeSearch, setActiveSearch] = useState([])
+    // const [activeSearch, setActiveSearch] = useState([])
+    const [input, setInput] = useState("")
 
-    const handleSearch = (e) => {
-        if(e.target.value == ''){
-            setActiveSearch([])
-            return false;
-        }
-        setActiveSearch(words.filter(w => w.includes(e.target.value)).slice(0,8))
-
+    const handleChange = (value) => {
+      setInput(value)
     }
   return (
 
@@ -19,7 +15,9 @@ const Search = () => {
       <div className="relative">
         <input 
         type="serch"
-        placeholder="Search"
+        placeholder="Type to search..."
+        value={input}
+        onChange={(e) => handleChange(e.target.value)}
         className="w-full p-4 rounded-full bg-white"
         />
         <button className="absolute right-1 top-1/2 -translate-y-1/2 p-4 bg-[#362518] rounded-full">
