@@ -9,6 +9,9 @@ import Signup from "./SignupPopup";
 import { ThemeContext } from "../contexts/auth";
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import LogoutPopup from "./LogoutPopup.jsx";
+import { useNavigate } from "react-router-dom"; 
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +27,13 @@ const NavBar = () => {
   const [isSignInOpen, setSignInOpen] = useState(false);
   const [isSignUpOpen, setSignUpOpen] = useState(false);
   const { isAuth, unAuth } = useContext(ThemeContext);
-  const [isOpen, setisOpen] = useState(false);
+  const [isLogOutOpen, setLogOutOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    unAuth(); // เปลี่ยนสถานะ Auth เป็น false
+    setLogOutOpen(false); // ปิด Popup
+    navigate("/"); // ย้ายกลับหน้า Home
+  };
   //ccc
   const Menus = ["Accout Setting", "Logout"];
   return (
@@ -75,33 +84,29 @@ const NavBar = () => {
 
             {isAuth ? (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    className="rounded-full hidden md:flex"
-                  >
-                    <CircleUser className="h-5 w-5" />
-                    <span className="sr-only">Toggle user menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      className="rounded-full hidden md:flex"
+                    >
+                      <CircleUser className="h-5 w-5" />
+                      <span className="sr-only">Toggle user menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
 
-                  <Link to={"user/auth/dashboard/1"}>
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                  </Link>
+                    <Link to="/mock">
+                      <DropdownMenuItem>Profile</DropdownMenuItem>
+                    </Link>
 
-                  <DropdownMenuItem
-                    onClick={() => {
-                      dispatch(logoutStatus({ isAuthenticated: false }));
-                      navigate("/");
-                    }}
-                  >
-                    <Link >Log out</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
+                    <DropdownMenuItem onClick={() => setLogOutOpen(true)}>
+                      Log out
+                    </DropdownMenuItem>
+
+                  </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <div className="relative hidden md:flex space-x-3">
@@ -122,7 +127,13 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <ResponsiveMenu open={open} />
+      <ResponsiveMenu
+      open={open}
+      openSignIn={() => setSignInOpen(true)}
+      openSignUp={() => setSignUpOpen(true)}
+      onClose={() => setOpen(false)}
+    />
+
       <SignIn
         isOpen={isSignInOpen}
         onClose={() => setSignInOpen(false)}
@@ -132,6 +143,11 @@ const NavBar = () => {
         isOpen={isSignUpOpen}
         onClose={() => setSignUpOpen(false)}
         openSignIn={() => setSignInOpen(true)}
+      />
+      <LogoutPopup
+        isOpen={isLogOutOpen}
+        onClose={() => setLogOutOpen(false)}
+        onConfirmLogout={handleLogout}
       />
     </>
   );

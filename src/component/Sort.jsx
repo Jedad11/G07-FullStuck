@@ -9,20 +9,20 @@ const Sort = () => {
         setIsOpen(false);
     }
     return (
-        <div className="flex items-center mb-2 relative gap-2 justify-end mr-10">
+        <div className="flex items-center mb-2 relative gap-2 justify-end mr-10 md:mb-[55px]">
             <div>
-                <p className="whitespace-nowrap">Sort by</p>
+                <p className="whitespace-nowrap font-medium">Sort by</p>
             </div>
             <div>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="border border-gray-300 p-2 pl-4 rounded-lg w-[343px] text-left"
+                    className="border border-gray-300 p-2 pl-4 rounded-lg lg:w-[343px] text-left font-medium"
                 >
                     {selectSort}
                 </button>
 
                 {isOpen && (
-                    <div className="absolute top-full mt-1 w-[343px] bg-white rounded-lg shadow-md z-10">
+                    <div className="absolute top-full mt-1 lg:w-[343px] bg-white rounded-lg shadow-md z-10">
                         <ul className="border border-gray-300 p-2 pl-4 rounded-lg space-y-1">
                             <li className="cursor-pointer hover:bg-gray-100" onClick={() => checkSelect("Lastest update")}>
                                 Lastest update
