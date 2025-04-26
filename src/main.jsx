@@ -14,6 +14,7 @@ import Writereview from "./pages/Writereview";
 import { ThemeProvider } from "@material-tailwind/react";
 import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
+import Booking from "./pages/Booking";
 //c
 
 const router = createBrowserRouter([
@@ -38,12 +39,16 @@ const router = createBrowserRouter([
         path:"/ResidentDetail",
         element: <ResidentDetail />,
       },
+      {
+        path: "/booking",
+        element: <Booking/>
+      },
     ],
   },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
+  // {
+  //   path: "/signin",
+  //   element: <SignIn />,
+  // },
   {
     path: "/review",
     element: <Writereview/>
@@ -52,6 +57,7 @@ const router = createBrowserRouter([
     path: "/mock",
     element: <AccountSetting/>
   },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
