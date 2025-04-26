@@ -6,7 +6,7 @@ import HomePageLogin from "./pages/HomePageLogin";
 import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
-import ResidentDetail from "./pages/ResidentDetail";
+// import ResidentDetail from "./pages/ResidentDetail";
 import NavBar from "./component/NavBar";
 import "./index.css";
 
@@ -14,7 +14,7 @@ import Writereview from "./pages/Writereview";
 import { ThemeProvider } from "@material-tailwind/react";
 import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
-//c
+import LogoutPopup from "./component/LogoutPopup"
 
 const router = createBrowserRouter([
   {
@@ -51,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/mock",
     element: <AccountSetting/>
+  },
+  {
+    path: "/logout",
+    element: <LogoutPopup/>
   },
 ]);
 

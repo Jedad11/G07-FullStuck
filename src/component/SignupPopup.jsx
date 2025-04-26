@@ -8,17 +8,26 @@ import { ThemeContext } from "../contexts/auth";
 import { NavLink } from "react-router";
 
 const SignupPop = ({ isOpen, onClose, openSignIn }) => {
+
   const [isSignIn, setSignIn] = useState(false);
   const { isAuth, setAuth } = useContext(ThemeContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordAgin, setShowPasswordAgain] = useState(false);
 
+//   const {password, error} = useSelector((state) => state.validate)
   const {
     register,
     handleSubmit,
+    formState: {errors},
   } = useForm({
     defaultValues: {
         firstName: '',
         lastName: '',
+        phoneNumber: '',
         email: '',
+        password: '',
+        confirmPassword: '',
+
     }
   });
   const handleSignInClick = () => {
@@ -60,11 +69,11 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
                 <p className="ml-1 text-red-600">*</p>
               </div>
               <input
+                id="firstName"
                 type="text"
-                name="Last Name"
-                placeholder="Last Name"
+                placeholder="First Name"
                 className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
-                required
+                {...register("firstName",{required:"Firstname is requried"})}
               />
 
               <div className="flex">
@@ -72,11 +81,11 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
                 <p className="ml-1 text-red-600">*</p>
               </div>
               <input
+                id="lastName"
                 type="text"
-                name="Last Name"
                 placeholder="Last Name"
                 className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
-                required
+                {...register("lastName",{required:"LastName is required"})}
               />
 
               <div className="flex">
@@ -84,17 +93,12 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
                 <p className="ml-1 text-red-600">*</p>
               </div>
               <input
-                type="text"
-                name="Phone number"
+                id="phoneNumber"
+                type="tel"
                 placeholder="0xx-xxx-xxx"
                 className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
+                {...register("phoneNumber",{required:"Phone Number is required"})}
               />
-
-              {/* <div className="flex">
-                <p className="mb-1">Gender</p>
-                <p className="ml-1 text-red-600">*</p>
-              </div>
-              <GenderDropdown /> */}
 
               <div className="flex">
                 <p className="mb-1">Email</p>
@@ -105,7 +109,7 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
                 name="Email"
                 placeholder="username@gmail.com"
                 className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
-                {...register("email")}
+                {...register("email",{required:"Email is required"})}
               />
 
               <div className="flex">
@@ -113,10 +117,11 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
                 <p className="ml-1 text-red-600">*</p>
               </div>
               <input
-                type="text"
-                name="Email"
+                id="password"
+                type={showPassword ? "text" : "password"}
                 className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
-                // {...register("email")}
+                {...register("password", {required: "Password is requried" , minLength: 6,})}
+                onClick={() => setShowPassword((prev) => !prev)}
               />
 
               <div className="flex">
@@ -124,10 +129,11 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
                 <p className="ml-1 text-red-600">*</p>
               </div>
               <input
-                type="text"
-                name="Email"
+                id="confirmPassword"
+                type={showPasswordAgin ? "text" : "password"}
                 className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
-                // {...register("email")}
+                {...register("confirmPassword", {required: "Confirm Password is requried" , minLength: 6,})}
+                onClick={() => setShowPasswordAgain((prev) => !prev)}
               />
 
               <button className="bg-[#362518] text-white p-3 rounded-lg" onClick={submit}>
