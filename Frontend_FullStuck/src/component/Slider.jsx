@@ -1,9 +1,8 @@
 import React from "react";
 import Kmutt3 from "../image/kmutt3.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Import Swiper CSS
-import "swiper/css/effect-fade"; // Import EffectFade CSS
-// import { EffectFade, Autoplay } from "swiper"; 
+import "swiper/css";
+import "swiper/css/effect-fade";
 import Kmutt10 from "../image/kmutt10.webp"
 import Kmutt11 from "../image/kmutt11.jpg"
 
@@ -46,7 +45,6 @@ const Slider = () => {
                 alt=""
               />
             </div>
-            {/* <div className="absolute w-full h-full bg-black/70"></div> */}
           </SwiperSlide>
         );
       })}

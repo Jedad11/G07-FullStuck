@@ -44,9 +44,10 @@ const RecommendationRoom = () => {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {rooms.map((room) => (
-          <div
-            key={room.id}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all"
+          <NavLink 
+            key={room.id} 
+            to={'/ResidentDetail'}
+            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all cursor-pointer"
           >
             <img
               src={room.imageUrl}
@@ -68,7 +69,7 @@ const RecommendationRoom = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </NavLink>
         ))}
       </div>
       <div className="text-center mt-8">

@@ -15,29 +15,28 @@ const ResponsiveMenu = ({ open, openSignIn, openSignUp, onClose }) => {
           <div className="z-10 font-Inter text-xl text-[#362518] font-semibold bg-[#ffedd5] py-10 m-6 rounded-3xl">
             <ul className="flex flex-col justify-center items-center gap-10 text-stone-500">
 
-              {/* ปุ่ม Sign In */}
+              {/* Sign In */}
               <button
                 className="SIGN_IN bg-[#362518] text-white py-2 px-4 rounded-lg hover:bg-[#4e3622]"
                 onClick={() => {
                   openSignIn();
-                  onClose(); // ปิดเมนูด้วย
+                  onClose();
                 }}
               >
                 Sign In
               </button>
 
-              {/* ปุ่ม Sign Up */}
+              {/* Sign Up */}
               <button
                 className="SIGN_UP bg-transparent border-2 border-[#362518] text-[#362518] py-2 px-4 rounded-lg hover:bg-[#ffedd5] hover:text-[#362518]"
                 onClick={() => {
                   openSignUp();
-                  onClose(); // ปิดเมนูด้วย
+                  onClose();
                 }}
               >
                 Sign up
               </button>
-
-              {/* เมนู NavLink */}
+              
               <NavLink
                 to="/"
                 onClick={onClose}

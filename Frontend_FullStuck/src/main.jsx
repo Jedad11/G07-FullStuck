@@ -14,6 +14,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
 import Booking from "./pages/Booking";
+import Recommend from "./pages/Recommend";
 //c
 
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         path: "/booking",
         element: <Booking/>
       },
+      ,{
+        path: "/recommend",
+        element: <Recommend/>
+      }
     ],
   },
   // {

@@ -3,7 +3,6 @@ import CheckIn from "./CheckIn";
 import CheckOut from "./CheckOut";
 import {AiOutlineSearch} from 'react-icons/ai'
 const Search = () => {
-    // const [activeSearch, setActiveSearch] = useState([])
     const [input, setInput] = useState("")
 
     const handleChange = (value) => {
