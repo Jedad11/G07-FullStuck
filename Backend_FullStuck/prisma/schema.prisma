@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite" 
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  first_name   String    @map("first_name")
+  last_name    String    @map("last_name")
+  birth_date   DateTime? @map("birth_date") // ไม่เอา
+  phone_number String?   @map("phone_number")
+  gender       String?   // ไม่เอา
+  email        String    @unique
+  addresses    Address[] //One-to-Many with Address table // ไม่เอา
+  created_at   DateTime  @default(now()) @map("created_at")
+  updated_at   DateTime  @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Address {
+  id           Int       @id @default(autoincrement())
+  user_id      Int       @map("user_id")
+  house_number String    @map("house_number")
+  street       String?
+  sub_district String?   @map("sub_district") // แขวง/ตำบล
+  district     String?   @map("district")     // เขต/อำเภอ
+  province     String    @map("province")     // จังหวัด
+  postal_code  String    @map("postal_code")  // รหัสไปรษณีย์
+  country      String    @default("Thailand") // ประเทศ
+  created_at   DateTime  @default(now()) @map("created_at")
+  updated_at   DateTime  @updatedAt @map("updated_at")
+  
+  // relations with User table
+  user         User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("addresses")
+  @@index([user_id])
+}
