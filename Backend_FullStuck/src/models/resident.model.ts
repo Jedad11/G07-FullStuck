@@ -8,6 +8,7 @@ export interface ResidentCreateInput {
     roomType: string;
     electricFee: number;
     waterFee: number;
+    rentalPrice: number;
   };
   facilities?: {
     aircon?: boolean;
@@ -185,4 +186,21 @@ export const residentModel = {
       where: { id },
     });
   },
+
+  ResidentCard: async (id: number) => {
+    return db.resident.findUnique({
+      where:{
+        id:id
+      },
+      select: {
+        residentName: true,
+        info: {
+          select: {
+            rentalPrice: true,
+            roomType: true
+          }
+        }
+      }
+    })
+  }
 };

@@ -46,6 +46,7 @@ model ResidentInfo {
   roomType     String
   electricFee  Float
   waterFee     Float
+  rentalPrice Int
   @@map("resident_info")
 }
 model ResidentFacilities {

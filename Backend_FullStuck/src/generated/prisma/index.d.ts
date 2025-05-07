@@ -3941,6 +3941,7 @@ export namespace Prisma {
     residentId: number | null
     electricFee: number | null
     waterFee: number | null
+    rentalPrice: number | null
   }
 
   export type ResidentInfoSumAggregateOutputType = {
@@ -3948,6 +3949,7 @@ export namespace Prisma {
     residentId: number | null
     electricFee: number | null
     waterFee: number | null
+    rentalPrice: number | null
   }
 
   export type ResidentInfoMinAggregateOutputType = {
@@ -3958,6 +3960,7 @@ export namespace Prisma {
     roomType: string | null
     electricFee: number | null
     waterFee: number | null
+    rentalPrice: number | null
   }
 
   export type ResidentInfoMaxAggregateOutputType = {
@@ -3968,6 +3971,7 @@ export namespace Prisma {
     roomType: string | null
     electricFee: number | null
     waterFee: number | null
+    rentalPrice: number | null
   }
 
   export type ResidentInfoCountAggregateOutputType = {
@@ -3978,6 +3982,7 @@ export namespace Prisma {
     roomType: number
     electricFee: number
     waterFee: number
+    rentalPrice: number
     _all: number
   }
 
@@ -3987,6 +3992,7 @@ export namespace Prisma {
     residentId?: true
     electricFee?: true
     waterFee?: true
+    rentalPrice?: true
   }
 
   export type ResidentInfoSumAggregateInputType = {
@@ -3994,6 +4000,7 @@ export namespace Prisma {
     residentId?: true
     electricFee?: true
     waterFee?: true
+    rentalPrice?: true
   }
 
   export type ResidentInfoMinAggregateInputType = {
@@ -4004,6 +4011,7 @@ export namespace Prisma {
     roomType?: true
     electricFee?: true
     waterFee?: true
+    rentalPrice?: true
   }
 
   export type ResidentInfoMaxAggregateInputType = {
@@ -4014,6 +4022,7 @@ export namespace Prisma {
     roomType?: true
     electricFee?: true
     waterFee?: true
+    rentalPrice?: true
   }
 
   export type ResidentInfoCountAggregateInputType = {
@@ -4024,6 +4033,7 @@ export namespace Prisma {
     roomType?: true
     electricFee?: true
     waterFee?: true
+    rentalPrice?: true
     _all?: true
   }
 
@@ -4121,6 +4131,7 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    rentalPrice: number
     _count: ResidentInfoCountAggregateOutputType | null
     _avg: ResidentInfoAvgAggregateOutputType | null
     _sum: ResidentInfoSumAggregateOutputType | null
@@ -4150,6 +4161,7 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    rentalPrice?: boolean
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residentInfo"]>
 
@@ -4161,6 +4173,7 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    rentalPrice?: boolean
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residentInfo"]>
 
@@ -4172,6 +4185,7 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    rentalPrice?: boolean
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residentInfo"]>
 
@@ -4183,9 +4197,10 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    rentalPrice?: boolean
   }
 
-  export type ResidentInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residentId" | "residentType" | "building" | "roomType" | "electricFee" | "waterFee", ExtArgs["result"]["residentInfo"]>
+  export type ResidentInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residentId" | "residentType" | "building" | "roomType" | "electricFee" | "waterFee" | "rentalPrice", ExtArgs["result"]["residentInfo"]>
   export type ResidentInfoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }
@@ -4209,6 +4224,7 @@ export namespace Prisma {
       roomType: string
       electricFee: number
       waterFee: number
+      rentalPrice: number
     }, ExtArgs["result"]["residentInfo"]>
     composites: {}
   }
@@ -4640,6 +4656,7 @@ export namespace Prisma {
     readonly roomType: FieldRef<"ResidentInfo", 'String'>
     readonly electricFee: FieldRef<"ResidentInfo", 'Float'>
     readonly waterFee: FieldRef<"ResidentInfo", 'Float'>
+    readonly rentalPrice: FieldRef<"ResidentInfo", 'Int'>
   }
     
 
@@ -10930,7 +10947,8 @@ export namespace Prisma {
     building: 'building',
     roomType: 'roomType',
     electricFee: 'electricFee',
-    waterFee: 'waterFee'
+    waterFee: 'waterFee',
+    rentalPrice: 'rentalPrice'
   };
 
   export type ResidentInfoScalarFieldEnum = (typeof ResidentInfoScalarFieldEnum)[keyof typeof ResidentInfoScalarFieldEnum]
@@ -11213,6 +11231,7 @@ export namespace Prisma {
     roomType?: StringFilter<"ResidentInfo"> | string
     electricFee?: FloatFilter<"ResidentInfo"> | number
     waterFee?: FloatFilter<"ResidentInfo"> | number
+    rentalPrice?: IntFilter<"ResidentInfo"> | number
     resident?: XOR<ResidentScalarRelationFilter, ResidentWhereInput>
   }
 
@@ -11224,6 +11243,7 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
     resident?: ResidentOrderByWithRelationInput
   }
 
@@ -11238,6 +11258,7 @@ export namespace Prisma {
     roomType?: StringFilter<"ResidentInfo"> | string
     electricFee?: FloatFilter<"ResidentInfo"> | number
     waterFee?: FloatFilter<"ResidentInfo"> | number
+    rentalPrice?: IntFilter<"ResidentInfo"> | number
     resident?: XOR<ResidentScalarRelationFilter, ResidentWhereInput>
   }, "id" | "residentId">
 
@@ -11249,6 +11270,7 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
     _count?: ResidentInfoCountOrderByAggregateInput
     _avg?: ResidentInfoAvgOrderByAggregateInput
     _max?: ResidentInfoMaxOrderByAggregateInput
@@ -11267,6 +11289,7 @@ export namespace Prisma {
     roomType?: StringWithAggregatesFilter<"ResidentInfo"> | string
     electricFee?: FloatWithAggregatesFilter<"ResidentInfo"> | number
     waterFee?: FloatWithAggregatesFilter<"ResidentInfo"> | number
+    rentalPrice?: IntWithAggregatesFilter<"ResidentInfo"> | number
   }
 
   export type ResidentFacilitiesWhereInput = {
@@ -11822,6 +11845,7 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    rentalPrice: number
     resident: ResidentCreateNestedOneWithoutInfoInput
   }
 
@@ -11833,6 +11857,7 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    rentalPrice: number
   }
 
   export type ResidentInfoUpdateInput = {
@@ -11841,6 +11866,7 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    rentalPrice?: IntFieldUpdateOperationsInput | number
     resident?: ResidentUpdateOneRequiredWithoutInfoNestedInput
   }
 
@@ -11852,6 +11878,7 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResidentInfoCreateManyInput = {
@@ -11862,6 +11889,7 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    rentalPrice: number
   }
 
   export type ResidentInfoUpdateManyMutationInput = {
@@ -11870,6 +11898,7 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResidentInfoUncheckedUpdateManyInput = {
@@ -11880,6 +11909,7 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResidentFacilitiesCreateInput = {
@@ -12559,6 +12589,7 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
   }
 
   export type ResidentInfoAvgOrderByAggregateInput = {
@@ -12566,6 +12597,7 @@ export namespace Prisma {
     residentId?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
   }
 
   export type ResidentInfoMaxOrderByAggregateInput = {
@@ -12576,6 +12608,7 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
   }
 
   export type ResidentInfoMinOrderByAggregateInput = {
@@ -12586,6 +12619,7 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
   }
 
   export type ResidentInfoSumOrderByAggregateInput = {
@@ -12593,6 +12627,7 @@ export namespace Prisma {
     residentId?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    rentalPrice?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -13636,6 +13671,7 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    rentalPrice: number
   }
 
   export type ResidentInfoUncheckedCreateWithoutResidentInput = {
@@ -13645,6 +13681,7 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    rentalPrice: number
   }
 
   export type ResidentInfoCreateOrConnectWithoutResidentInput = {
@@ -13817,6 +13854,7 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResidentInfoUncheckedUpdateWithoutResidentInput = {
@@ -13826,6 +13864,7 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type ResidentFacilitiesUpsertWithoutResidentInput = {

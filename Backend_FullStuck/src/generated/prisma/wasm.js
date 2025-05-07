@@ -139,7 +139,8 @@ exports.Prisma.ResidentInfoScalarFieldEnum = {
   building: 'building',
   roomType: 'roomType',
   electricFee: 'electricFee',
-  waterFee: 'waterFee'
+  waterFee: 'waterFee',
+  rentalPrice: 'rentalPrice'
 };
 
 exports.Prisma.ResidentFacilitiesScalarFieldEnum = {

@@ -8,5 +8,6 @@ residentRouter.post("/", residentController.createResident);
 residentRouter.get("/:id", residentController.getResidentById);
 residentRouter.patch("/:id", residentController.updateResident);
 residentRouter.delete("/:id", residentController.deleteResident);
+residentRouter.get('/card/:id', residentController.ResidentCard);
 
 export { residentRouter };
