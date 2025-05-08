@@ -3,7 +3,8 @@ import { Axios } from "axiosInstace";
 export const getAllUsers = async () => {
     try {
         const response = await Axios.get('/users');
-        return { success: true, 
+        return { 
+            success: true, 
             data: response.data, 
             msg: 'Users fetched successfully' };
     } catch (e) {
