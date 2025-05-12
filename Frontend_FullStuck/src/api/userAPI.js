@@ -1,4 +1,4 @@
-import { Axios } from "axiosInstace";
+import { Axios } from "/Users/jedad/Desktop/csc105/G07-FullStuck/Frontend_FullStuck/axiosInstace.js";
 
 export const getAllUsers = async () => {
     try {
