@@ -26,7 +26,6 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
         email: '',
         password: '',
         confirmPassword: '',
-
     }
   });
   const handleSignInClick = () => {
