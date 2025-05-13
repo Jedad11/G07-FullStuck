@@ -1,13 +1,13 @@
-import { Axios } from "axiosInstace";
+import { Axios } from ".../axiosInstace.js";
 
-export const getAllResident = async () => {
+export const getAllResidents = async () => {
     try {
         const response = await Axios.get('/residents');
         return {
             success: true,
             data: response.data,
-            msg:'Residents fetched successfully'
-        };
+            msg: 'Residents fetch successfully'
+        }
     } catch (e) {
         return { 
             success: false, 
@@ -15,33 +15,16 @@ export const getAllResident = async () => {
             msg: `${e}`
         }
     }
-};
+}
 
-export const createResident = async (resident) => {
+export const createResident = async (Information) => {
     try {
-        const response = await Axios.post('/residents',resident)
+        const response = await Axios.post('/residents',Information)
         return {
             success: true,
             data: response.data,
             msg: 'Resident created successfully'
-        };
-    } catch (error) {
-        return { 
-            success: false, 
-            data: null, 
-            msg: `${e}`
         }
-    }
-};
-
-export const getResidentById = async (id) => {
-    try {
-        const response = await Axios.get(`/resident/${id}`);
-        return {
-            success: true,
-            data: response.data,
-            msg: 'Resident fetched successfully'
-        };
     } catch (e) {
         return { 
             success: false, 
@@ -49,16 +32,33 @@ export const getResidentById = async (id) => {
             msg: `${e}`
         }
     }
-};
+}
 
-export const updateResident = async (id, updateData) => {
+export const getResidentById = async (id) => {
     try {
-        const response = await Axios.patch(`/resident/${id}`, updateData);
+        const response = await Axios.get(`/resident/${id}`)
+        return {
+            success: true,
+            data: response.data,
+            msg: 'Resident fetch successfuklly'
+        }
+    } catch (e) {
+        return { 
+            success: false, 
+            data: null, 
+            msg: `${e}`
+        }
+    }
+}
+
+export const updateResident = async (id, Information) => {
+    try {
+        const response = await Axios.patch(`/residents/${id}`, Information)
         return {
             success: true,
             data: response.data,
             msg: 'Resident updated successfully'
-        };
+        }
     } catch (e) {
         return { 
             success: false, 
@@ -70,12 +70,12 @@ export const updateResident = async (id, updateData) => {
 
 export const deleteResident = async (id) => {
     try {
-        const response = await Axios.delete(`/residents/${id}`);
+        const response = await Axios.delete(`/resident/${id}`);
         return {
             success: true,
             data: response.data,
             msg: 'Resident deleted successfully'
-        };
+        }
     } catch (e) {
         return { 
             success: false, 
@@ -87,12 +87,12 @@ export const deleteResident = async (id) => {
 
 export const ResidentCard = async (id) => {
     try {
-        const response = await Axios.get(`/residents/card./${id}`);
+        const response = await Axios.get(`/residents/card/${id}`);
         return {
             success: true,
             data: response.data,
             msg: 'Resident card fetch successfully'
-        };
+        }
     } catch (e) {
         return { 
             success: false, 
