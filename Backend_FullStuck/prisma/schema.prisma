@@ -20,6 +20,7 @@ model User {
   lastName       String
   phoneNumber    String
   email          String    @unique
+  password       String
   profilePicture String?
   bookings       Booking[]
   reviews        Review[]

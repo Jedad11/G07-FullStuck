@@ -1,4 +1,4 @@
-import { Axios } from "axiosInstace";
+import { Axios } from "@/utils/axiosInstace";
 
 export const getAllBookings = async () => {
     try {

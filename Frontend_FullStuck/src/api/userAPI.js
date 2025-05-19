@@ -1,4 +1,4 @@
-import { Axios } from "/Users/jedad/Desktop/csc105/G07-FullStuck/Frontend_FullStuck/axiosInstace.js";
+import { Axios } from "@/utils/axiosInstace";
 
 export const getAllUsers = async () => {
     try {
@@ -16,15 +16,9 @@ export const getAllUsers = async () => {
     }
 }
 
-export const createUser = async (firstname, lastname, phonenumber, email, profilepicture = undefined) => {
+export const createUser = async (UserData) => {
     try {
-        const response = await Axios.post('/users', {
-            firstName: firstname,
-            lastName: lastname,
-            phoneNumber: phonenumber,
-            email: email,
-            profilePicture: profilepicture
-        });
+        const response = await Axios.post('/users', UserData);
         return { 
             success: true, 
             data: response.data, 

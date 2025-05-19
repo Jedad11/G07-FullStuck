@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Select, Option, Rating } from "@material-tailwind/react";
 import PopupReview from "../component/PopupReview";
+import * as ReviewAPI from "../api/reviewAPI.js"
 
 function Writereview() {
   const [guestStatus, setGuestStatus] = useState("");
@@ -14,7 +15,7 @@ function Writereview() {
   const [message, setMessage] = useState("");
   const [popup, setPopup] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const reviewData = {
       guestStatus,
       stayPeriod,
@@ -22,6 +23,10 @@ function Writereview() {
       message,
     };
     console.log("Submitted Review:", reviewData);
+    const response = await ReviewAPI.createReview(guestStatus, stayPeriod, ratings, message);
+    if(!response.success){
+      alert(response.msg)
+    }
     setPopup(true);
   };
 

@@ -1,4 +1,4 @@
-import { Axios } from ".../axiosInstace.js";
+import { Axios } from "@/utils/axiosInstace";
 
 export const getAllReviews = async () => {
     try {
@@ -19,7 +19,7 @@ export const getAllReviews = async () => {
 
 export const createReview = async (Information) => {
     try {
-        const response = Axios.get('/reviews',Information);
+        const response = Axios.post('/reviews',Information);
         return{
             success: true,
             data: response.data,

@@ -1,14 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `users` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-PRAGMA foreign_keys=off;
-DROP TABLE "users";
-PRAGMA foreign_keys=on;
-
 -- CreateTable
 CREATE TABLE "user" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -16,6 +5,7 @@ CREATE TABLE "user" (
     "lastName" TEXT NOT NULL,
     "phoneNumber" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "profilePicture" TEXT
 );
 
@@ -35,6 +25,7 @@ CREATE TABLE "resident_info" (
     "roomType" TEXT NOT NULL,
     "electricFee" REAL NOT NULL,
     "waterFee" REAL NOT NULL,
+    "rentalPrice" INTEGER NOT NULL,
     CONSTRAINT "resident_info_residentId_fkey" FOREIGN KEY ("residentId") REFERENCES "resident" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 

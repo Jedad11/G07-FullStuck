@@ -5,6 +5,7 @@ export interface UserCreateInput {
   lastName: string;
   phoneNumber: string;
   email: string;
+  password: string;
   profilePicture?: string;
 }
 
