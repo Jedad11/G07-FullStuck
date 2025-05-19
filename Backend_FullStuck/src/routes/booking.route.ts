@@ -11,4 +11,4 @@ bookingRouter.delete("/:id", bookingController.deleteBooking);
 bookingRouter.get("/user/:userId", bookingController.getBookingsByUserId);
 bookingRouter.get("/resident/:residentId", bookingController.getBookingsByResidentId);
 
-export { bookingRouter };
+export default bookingRouter;

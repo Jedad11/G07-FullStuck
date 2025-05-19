@@ -10,4 +10,4 @@ userRouter.patch("/:id", userController.updateUser)
 userRouter.delete("/:id", userController.deleteUser); 
 
 
-export { userRouter };
+export default userRouter;

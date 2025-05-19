@@ -1,188 +1,186 @@
 import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
-import GenderDropdown from "./GenderDropdown";
 import SignIn from "./SigninPopup";
 import { useForm } from "react-hook-form";
 import { ThemeContext } from "../contexts/auth";
-import { NavLink } from "react-router";
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import * as UserAPI from "../api/userAPI";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignupPop = ({ isOpen, onClose, openSignIn }) => {
-
   const [isSignIn, setSignIn] = useState(false);
-  const { isAuth, setAuth } = useContext(ThemeContext);
+  const { setAuth } = useContext(ThemeContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordAgin, setShowPasswordAgain] = useState(false);
+  const [showPasswordAgain, setShowPasswordAgain] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    }
+  const signupSchema = z.object({
+    firstName: z.string().nonempty("First name is required"),
+    lastName: z.string().nonempty("Last name is required"),
+    phoneNumber: z.string()
+      .nonempty("Phone Number is required")
+      .regex(/^0\d{9}$/, "Phone Number format must be 0xxxxxxxx"),
+    email: z.string().nonempty("Email is required").email("Invalid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters"),
+  }).refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
+
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: zodResolver(signupSchema),
   });
 
   const handleSignInClick = () => {
-    onClose(); // Close the SignIn
-    openSignIn(); // Open the SignUp
+    onClose();
+    openSignIn();
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   const submit = async (formData) => {
-  console.log(formData);
-  setAuth(true);
-  const { confirmPassword, ...userData } = formData;
-  const response = await UserAPI.createUser(userData);
-  if(!response.success){
-    alert(response.msg)
-  }
-  onClose();
+    const { confirmPassword, ...userData } = formData;
+    const response = await UserAPI.createUser(userData);
+    if (!response.success) {
+      alert(response.msg);
+      return;
+    }
+    setAuth(true);
+    reset();
+    onClose();
+  };
 
-};
+  if (!isOpen) return null;
+
   return (
-    <div className="flex justify-center items-center fixed inset-0 z-100 blackdrop-blur-md bg-[rgba(128,128,128,0.25)] mx-auto">
-      <div className="fixed bg-white p-10 rounded-lg shadow-lg max-w-7xl mx-auto">
-        <div className="fixed inset-0 bg-[rgba(128,128,128,0.25)] backdrop-blur-md flex justify-center items-center z-50">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="bg-white p-6 rounded-lg shadow-lg w-96"
-          >
-            <div className="flex flex-col-reverse ">
-              <button onClick={onClose} className="ml-auto">
-                <RxCross1 />
-              </button>
-            </div>
-            <div className="flex flex-col items-center justify-center m-10">
-              <h2 className="text-xl text-[#362518] font-bold">
-                Register your account
-              </h2>
-            </div>
-            <div className="flex flex-col">
-              <form onSubmit={handleSubmit(submit)}>
-                {/* input ต่าง ๆ */}
-                <div className="flex">
-                  <p className="mb-1">First Name</p>
-                  <p className="ml-1 text-red-600">*</p>
-                </div>
-                <input
-                  id="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg w-full"
-                  {...register("firstName", { required: "Firstname is requried" })}
-                />
+    <div className="fixed inset-0 z-50 bg-[rgba(128,128,128,0.25)] backdrop-blur-md flex justify-center items-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        className="bg-white p-6 rounded-lg shadow-lg w-96 relative"
+      >
+        <button onClick={onClose} className="absolute top-4 right-4 text-xl">
+          <RxCross1 />
+        </button>
 
-                <div className="flex">
-                  <p className="mb-1">Last Name</p>
-                  <p className="ml-1 text-red-600">*</p>
-                </div>
-                <input
-                  id="lastName"
-                  type="text"
-                  placeholder="Last Name"
-                  className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg w-full"
-                  {...register("lastName", { required: "LastName is required" })}
-                />
+        <h2 className="text-xl text-center font-bold text-[#362518] mb-6">
+          Register your account
+        </h2>
 
-                <div className="flex">
-                  <p className="mb-1">Phone Number</p>
-                  <p className="ml-1 text-red-600">*</p>
-                </div>
-                <input
-                  id="phoneNumber"
-                  type="tel"
-                  placeholder="0xx-xxx-xxx"
-                  className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg w-full"
-                  {...register("phoneNumber", { required: "Phone Number is required" })}
-                />
+        <form onSubmit={handleSubmit(submit)} className="space-y-4">
+          {/* First Name */}
+          <div>
+            <label className="flex items-center mb-1">
+              First Name <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="First Name"
+              className="border border-gray-300 p-2 rounded-lg w-full"
+              {...register("firstName")}
+            />
+            {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
+          </div>
 
-                <div className="flex">
-                  <p className="mb-1">Email</p>
-                  <p className="ml-1 text-red-600">*</p>
-                </div>
-                <input
-                  type="text"
-                  name="Email"
-                  placeholder="username@gmail.com"
-                  className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg w-full"
-                  {...register("email", { required: "Email is required" })}
-                />
-                <div className="flex flex-col mb-2 relative">
-                  <label htmlFor="password" className="mb-1 flex items-center">
-                    Password <span className="ml-1 text-red-600">*</span>
-                  </label>
-                  <input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    className="border border-gray-300 p-2 pl-4 rounded-lg w-full pr-10"
-                    {...register("password", { required: "Password is required", minLength: 6 })}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(prev => !prev)}
-                    className="absolute right-3 top-9 text-gray-500"
-                    tabIndex={-1}
-                  >
-                    {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
-                  </button>
-                </div>
+          {/* Last Name */}
+          <div>
+            <label className="flex items-center mb-1">
+              Last Name <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Last Name"
+              className="border border-gray-300 p-2 rounded-lg w-full"
+              {...register("lastName")}
+            />
+            {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
+          </div>
 
-                <div className="flex flex-col mb-2 relative">
-                  <label htmlFor="confirmPassword" className="mb-1 flex items-center">
-                    Confirm Password <span className="ml-1 text-red-600">*</span>
-                  </label>
-                  <input
-                    id="confirmPassword"
-                    type={showPasswordAgin ? "text" : "password"}
-                    className="border border-gray-300 p-2 pl-4 rounded-lg w-full pr-10"
-                    {...register("confirmPassword", { required: "Confirm Password is required", minLength: 6 })}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPasswordAgain(prev => !prev)}
-                    className="absolute right-3 top-9 text-gray-500"
-                    tabIndex={-1}
-                  >
-                    {showPasswordAgin ? <IconEyeOff size={20} /> : <IconEye size={20} />}
-                  </button>
-                </div>
-                <button type="submit" className="bg-[#362518] text-white p-3 rounded-lg w-full">
-                  Submit
-                </button>
-              </form>
+          {/* Phone Number */}
+          <div>
+            <label className="flex items-center mb-1">
+              Phone Number <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type="tel"
+              placeholder="0xx-xxx-xxx"
+              className="border border-gray-300 p-2 rounded-lg w-full"
+              {...register("phoneNumber")}
+            />
+            {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>}
+          </div>
 
+          {/* Email */}
+          <div>
+            <label className="flex items-center mb-1">
+              Email <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type="email"
+              placeholder="username@gmail.com"
+              className="border border-gray-300 p-2 rounded-lg w-full"
+              {...register("email")}
+            />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          </div>
 
-              {/* <button className="bg-[#362518] text-white p-3 rounded-lg" onClick={submit}>
-                Submit
-              </button> */}
-              <div className="flex mt-5">
-                <p className="">Already have account?</p>
-                <p
-                  className="ml-1 font-bold underline"
-                  onClick={handleSignInClick}
-                >
-                  Sign In
-                </p>
-              </div>
-            </div>
-          </motion.div>
-          <SignIn isOpen={isSignIn} onClose={() => setSignIn(false)} />
+          {/* Password */}
+          <div className="relative">
+            <label className="flex items-center mb-1">
+              Password <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type={showPassword ? "text" : "password"}
+              className="border border-gray-300 p-2 rounded-lg w-full pr-10"
+              {...register("password")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-9 text-gray-500"
+              tabIndex={-1}
+            >
+              {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+            </button>
+            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+          </div>
+
+          {/* Confirm Password */}
+          <div className="relative">
+            <label className="flex items-center mb-1">
+              Confirm Password <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type={showPasswordAgain ? "text" : "password"}
+              className="border border-gray-300 p-2 rounded-lg w-full pr-10"
+              {...register("confirmPassword")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPasswordAgain(!showPasswordAgain)}
+              className="absolute right-3 top-9 text-gray-500"
+              tabIndex={-1}
+            >
+              {showPasswordAgain ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+            </button>
+            {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
+          </div>
+
+          <button type="submit" className="bg-[#362518] text-white p-3 rounded-lg w-full">
+            Submit
+          </button>
+        </form>
+
+        <div className="flex justify-center mt-5 text-sm">
+          <p>Already have an account?</p>
+          <button className="ml-1 font-bold underline" onClick={handleSignInClick}>
+            Sign In
+          </button>
         </div>
-      </div>
+
+        <SignIn isOpen={isSignIn} onClose={() => setSignIn(false)} />
+      </motion.div>
     </div>
   );
 };

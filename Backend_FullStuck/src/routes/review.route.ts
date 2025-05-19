@@ -11,4 +11,4 @@ reviewRouter.delete("/:id", reviewController.deleteReview);
 reviewRouter.get("/user/:userId", reviewController.getReviewsByUserId);
 reviewRouter.get("/resident/:residentId", reviewController.getReviewsByResidentId);
 
-export { reviewRouter };
+export default reviewRouter;
