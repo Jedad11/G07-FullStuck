@@ -21,8 +21,6 @@ function Condo() {
   useEffect(() => {
     handleFetchCondosData();
   }, []);
-
-  // ✅ จัดเรียงข้อมูลตามค่าที่เลือก
   const sortedCondos = React.useMemo(() => {
     const sorted = [...condos];
     switch (sortType) {
