@@ -187,8 +187,42 @@ export const residentModel = {
     });
   },
 
-  ResidentCard: async () => {
+  ResidentCardCondo: async () => {
     return db.resident.findMany({
+      where: {
+        info: {
+          residentType: "Condo"
+        }
+      },
+      select: {
+        residentName: true,
+        info: {
+          select: {
+            rentalPrice: true,
+            roomType: true
+          }
+        },
+        address: {
+          select: {
+            houseNumber: true,
+            street: true,
+            subDistrict: true,
+            district: true,
+            province: true,
+            postalCode: true
+          }
+        }
+      }
+    });
+  },
+  
+  ResidentCardApartment: async () => {
+    return db.resident.findMany({
+      where: {
+        info: {
+          residentType: "Apartment"
+        }
+      },
       select: {
         residentName: true,
         info: {

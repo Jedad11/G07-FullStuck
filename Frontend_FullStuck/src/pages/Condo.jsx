@@ -11,7 +11,7 @@ function Condo() {
 
   const handleFetchCondosData = async () => {
     try {
-      const response = await residentAPI.ResidentCard()
+      const response = await residentAPI.ResidentCardCondo()
       setCondos(Array.isArray(response.data) ? response.data : [])
     } catch (error) {
       console.error("Error loading todos:", error);

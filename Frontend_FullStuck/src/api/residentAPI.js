@@ -85,13 +85,30 @@ export const deleteResident = async (id) => {
     }
 }
 
-export const ResidentCard = async (id) => {
+export const ResidentCardCondo = async (id) => {
     try {
-        const response = await Axios.get(`/residents/card`);
+        const response = await Axios.get(`/residents/card/condo`);
         return {
             success: true,
             data: response.data,
-            msg: 'Resident card fetch successfully'
+            msg: 'Resident card fetch by condo successfully'
+        }
+    } catch (e) {
+        return { 
+            success: false, 
+            data: null, 
+            msg: `${e}`
+        }
+    }
+}
+
+export const ResidentCardApartment = async (id) => {
+    try {
+        const response = await Axios.get(`/residents/card/apartment`);
+        return {
+            success: true,
+            data: response.data,
+            msg: 'Resident card fetch by apartment successfully'
         }
     } catch (e) {
         return { 
