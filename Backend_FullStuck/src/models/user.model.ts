@@ -1,5 +1,5 @@
 import { db } from "../index.ts";
-import { hash, compare } from 'bcrypt';
+import { hash } from 'bcrypt';
 
 export interface UserCreateInput {
   firstName: string;
@@ -81,16 +81,4 @@ export const userModel = {
       where: { id },
     });
   },
-
-  findUserByEmail: async (Email: string) => {
-    return db.user.findUnique({
-      where:{
-        email: Email
-      }
-    })
-  },
-
-  validatePassword: async (password: string, hash: string) => {
-    return compare(password, hash)
-  }
 };

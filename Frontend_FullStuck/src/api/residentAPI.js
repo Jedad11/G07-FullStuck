@@ -87,7 +87,7 @@ export const deleteResident = async (id) => {
 
 export const ResidentCard = async (id) => {
     try {
-        const response = await Axios.get(`/residents/card/${id}`);
+        const response = await Axios.get(`/residents/card`);
         return {
             success: true,
             data: response.data,

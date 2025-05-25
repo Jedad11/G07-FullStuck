@@ -187,11 +187,8 @@ export const residentModel = {
     });
   },
 
-  ResidentCard: async (id: number) => {
-    return db.resident.findUnique({
-      where:{
-        id:id
-      },
+  ResidentCard: async () => {
+    return db.resident.findMany({
       select: {
         residentName: true,
         info: {
@@ -199,8 +196,18 @@ export const residentModel = {
             rentalPrice: true,
             roomType: true
           }
+        },
+        address: {
+          select: {
+            houseNumber: true,
+            street: true,
+            subDistrict: true,
+            district: true,
+            province: true,
+            postalCode: true
+          }
         }
       }
-    })
+    });
   }
 };

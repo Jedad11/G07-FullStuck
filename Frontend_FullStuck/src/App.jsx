@@ -12,28 +12,6 @@ import * as userAPI from './api/userAPI'
 
 
 function App() {
-  const [user, setUsers] = useState([]);
-
-  async function handleFetchUsersData() {
-    try {
-      const response = await userAPI.getAllUsers();
-      console.log("Fetched response:", response);
-
-      setUsers(Array.isArray(response.data) ? response.data : []);
-    } catch (e) {
-      console.error("Fetch error:", e.message);
-    }
-  }
-
-  useEffect(() => {
-    handleFetchUsersData();
-  }, []);
-
-  useEffect(() => {
-    console.log("Updated user state:", user);
-  }, [user]);
-
-
   return (
     <div>
         <NavBar />

@@ -2,24 +2,67 @@ import React from 'react'
 import Card from '../component/Card.jsx'
 import Back from '../component/Back.jsx'
 import Sort from '../component/Sort.jsx'
+import * as residentAPI from "../api/residentAPI.js"
+import { useState, useEffect } from 'react'
 
 function Condo() {
+  const [condos, setCondos] = useState([]);
+  const [sortType, setSortType] = useState("Lastest update");
+
+  const handleFetchCondosData = async () => {
+    try {
+      const response = await residentAPI.ResidentCard()
+      setCondos(Array.isArray(response.data) ? response.data : [])
+    } catch (error) {
+      console.error("Error loading todos:", error);
+    }
+  }
+
+  useEffect(() => {
+    handleFetchCondosData();
+  }, []);
+
+  // ✅ จัดเรียงข้อมูลตามค่าที่เลือก
+  const sortedCondos = React.useMemo(() => {
+    const sorted = [...condos];
+    switch (sortType) {
+      case "Highest price":
+        return sorted.sort((a, b) => (b.info?.rentalPrice || 0) - (a.info?.rentalPrice || 0));
+      case "Lowest price":
+        return sorted.sort((a, b) => (a.info?.rentalPrice || 0) - (b.info?.rentalPrice || 0));
+      default:
+        return sorted;
+    }
+  }, [condos, sortType]);
+
   return (
     <div className='md:max-w-[768px] xl:max-w-[1306px] mx-auto'>
-      <Back/>
-      <h1 className='xl:text-[50px] md:text-[24px] text-[20px] font-bold leading-snug ml-18 '>Condominium near 
-      <br />King Mongkut's University of Technology Thonburi</h1>
+      <Back />
+      <h1 className='xl:text-[50px] md:text-[24px] text-[20px] font-bold leading-snug ml-18 '>
+        Condominium near <br />King Mongkut's University of Technology Thonburi
+      </h1>
       <div className="h-px bg-gray-300 my-4" />
-      <Sort/>
+      
+      <Sort onSortChange={setSortType} />
+
       <div className="space-y-4">
-        <Card Name="A" Floor="8" Price="8,500" />
-        <Card Name="B" Floor="10" Price="10,500" />
-        <Card Name="C" Floor="9" Price="4,000" className="hidden md:block" />
-        <Card Name="D" Floor="8" Price="5,600" className="hidden xl:block" />
-        <Card Name="E" Floor="5" Price="2,000" className="hidden xl:block" />
+        {sortedCondos.map((condo, index) => {
+          const { residentName, info, address } = condo;
+          const fullAddress = `${address?.street || ""}, ${address?.subDistrict || ""}, ${address?.district || ""}, ${address?.province || ""} ${address?.postalCode || ""}`;
+          return (
+            <Card
+              key={index}
+              Name={residentName}
+              Price={info?.rentalPrice || "N/A"}
+              UnitType={info?.roomType || "N/A"}
+              Address={fullAddress}
+            />
+          );
+        })}
       </div>
     </div>
-  )
+  );
 }
+
 
 export default Condo

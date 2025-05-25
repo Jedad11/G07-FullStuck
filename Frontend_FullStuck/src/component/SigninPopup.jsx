@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
 import SignUp from "./SignupPopup";
-import App from "../App";
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../contexts/auth";
 import { useForm } from "react-hook-form";
+import * as authAPI from "@/api/authAPI";
+import { IconEye, IconEyeOff } from '@tabler/icons-react';
+
 
 const SignIn = ({ isOpen, onClose, openSignUp }) => {
   const [isSignUp, setSignUp] = useState(false);
-  const [isLogIn, setLogIn] = useState(false);
   const { isAuth, setAuth } = useContext(ThemeContext);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -17,19 +18,21 @@ const SignIn = ({ isOpen, onClose, openSignUp }) => {
     openSignUp(); // Open the SignUp
   };
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+    register, handleSubmit, formState: { errors }, reset } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const handleLogin = () => {
-    onClose();
-    setLogIn(true);
+  const submit = async (formData) => {    
+    const response = await authAPI.Login(formData.email, formData.password);
+    if (!response.success) {
+      alert(response.msg);
+      return;
+    }
     setAuth(true);
+    reset();
+    onClose();
   };
 
   if (!isOpen) {
@@ -37,7 +40,7 @@ const SignIn = ({ isOpen, onClose, openSignUp }) => {
   }
 
   return (
-    <div onSubmit={handleSubmit} className="fixed inset-0 bg-[rgba(128,128,128,0.25)] backdrop-blur-md flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-[rgba(128,128,128,0.25)] backdrop-blur-md flex justify-center items-center z-50">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -55,41 +58,45 @@ const SignIn = ({ isOpen, onClose, openSignUp }) => {
             Login into your account
           </p>
         </div>
-        <div className="flex flex-col">
-          <p className="mb-1">Email</p>
-          <input
-            id="email"
-            type="email"
-            placeholder="username@gmail.com"
-            className="border border-gray-300 mb-5 p-2 pl-4 rounded-lg"
-            {...register("email", { requried: "Email is resuried" })}
-          />
-          {errors.email && (
-            <p className="text-red-600 text-sm">{errors.email.message}</p>
-          )}
-          <p className="mb-1">Password</p>
-          <input
-            id="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            className="border border-gray-300 mb-2 p-2 pl-4 rounded-lg"
-            {...register("password", {
-              required: "Password is requried",
-              minLength: 6,
-            })}
-            onClick={() => setShowPassword((prev) => !prev)}
-          />
-          {errors.password && (
-            <p className="text-red-600 text-sm">{errors.email.password}</p>
-          )}
-          <p className="m-2 underline">Forget Password?</p>
-          <button
-            className="bg-[#362518] text-white p-3 rounded-lg"
-            onClick={handleLogin}
-          >
+        <form onSubmit={handleSubmit(submit)} className="space-y-4">
+          {/* Email */}
+          <div>
+            <label className="flex items-center mb-1">
+              Email <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type="email"
+              placeholder="username@gmail.com"
+              className="border border-gray-300 p-2 rounded-lg w-full"
+              {...register("email")}
+            />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          </div>
+
+          {/* Password */}
+          <div className="relative">
+            <label className="flex items-center mb-1">
+              Password <span className="ml-1 text-red-600">*</span>
+            </label>
+            <input
+              type={showPassword ? "text" : "password"}
+              className="border border-gray-300 p-2 rounded-lg w-full pr-10"
+              {...register("password")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-9 text-gray-500"
+              tabIndex={-1}
+            >
+              {showPassword ? <IconEyeOff size={20} /> : <IconEye size={20} />}
+            </button>
+            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+          </div>
+          <button type="submit" className="bg-[#362518] text-white p-3 rounded-lg w-full">
             Sign In
           </button>
-        </div>
+        </form>
         <div className="flex mt-5">
           <p className="">Don't have an account yet?</p>
           <p className="ml-1 font-bold underline" onClick={handleRegisterClick}>

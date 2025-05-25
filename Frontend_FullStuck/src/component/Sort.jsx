@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { IconChevronDown , IconAlignLeft, } from '@tabler/icons-react'
+import { IconChevronDown, IconAlignLeft, } from '@tabler/icons-react'
 
-const Sort = () => {
+const Sort = ({ onSortChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectSort, setSort] = useState("Lastest update");
 
     const checkSelect = (type) => {
         setSort(type);
         setIsOpen(false);
+        onSortChange(type);
     }
     return (
         <div className="flex items-center mb-2 relative gap-2 justify-end mr-10 md:mb-[55px]">
@@ -21,7 +22,7 @@ const Sort = () => {
                     className="flex p-2 pl-4 rounded-lg text-left font-medium"
                 >
                     {selectSort}
-                    <IconChevronDown className="items-end pl-2"/>
+                    <IconChevronDown className="items-end pl-2" />
                 </button>
 
                 {isOpen && (
@@ -43,5 +44,4 @@ const Sort = () => {
         </div>
     )
 }
-
 export default Sort;

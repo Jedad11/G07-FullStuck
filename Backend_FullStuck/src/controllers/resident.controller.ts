@@ -96,14 +96,7 @@ export const residentController = {
 
   ResidentCard: async (c:Context) => {
     try {
-      const residentId = parseInt(c.req.param('id'));
-      if(isNaN(residentId)){
-        return c.json({ message: 'Invalid resident ID' }, 400);
-      }
-      const resident = await residentModel.ResidentCard(residentId);
-      if(!resident){
-        return c.json({ message: 'Resident not found' }, 404);
-      }
+      const resident = await residentModel.ResidentCard();
       return c.json(resident, 200);
     } catch (error) {
       console.error('Error fetching resident:', error);

@@ -1,5 +1,5 @@
 import type { Context } from "hono"
-import { userModel } from "../models/user.model.ts"
+import { authModel } from "../models/auth.model.ts"
 import { generateToken } from "../utils/token.ts"
 
 interface Auth {
@@ -9,12 +9,14 @@ interface Auth {
 
 export const login = async (c: Context) => {
     try {
-        const { email, password } = await c.req.json<Auth>()
-        const user = await userModel.findUserByEmail(email);
+        const data = await c.req.json<Auth>();
+        
+        const user = await authModel.findUserByEmail(data.email);
+        
         if(!user){
             return c.json ({ msg: "Invalid email" },401);
         }
-        const isValid = await userModel.validatePassword(password, user.password);
+        const isValid = await authModel.validatePassword(data.password, user.password);
         if(!isValid){
             return c.json ({msg: "Invalid password"},401);
         }
