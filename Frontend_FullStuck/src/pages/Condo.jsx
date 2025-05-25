@@ -62,5 +62,4 @@ function Condo() {
   );
 }
 
-
 export default Condo
