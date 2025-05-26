@@ -40,16 +40,17 @@ function Condo() {
         Condominium near <br />King Mongkut's University of Technology Thonburi
       </h1>
       <div className="h-px bg-gray-300 my-4" />
-      
+
       <Sort onSortChange={setSortType} />
 
       <div className="space-y-4">
         {sortedCondos.map((condo, index) => {
-          const { residentName, info, address } = condo;
+          const { id, residentName, info, address } = condo;
           const fullAddress = `${address?.street || ""}, ${address?.subDistrict || ""}, ${address?.district || ""}, ${address?.province || ""} ${address?.postalCode || ""}`;
           return (
             <Card
-              key={index}
+              key={id || index}
+              id={id}
               Name={residentName}
               Price={info?.rentalPrice || "N/A"}
               UnitType={info?.roomType || "N/A"}

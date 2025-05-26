@@ -36,7 +36,7 @@ export const createResident = async (Information) => {
 
 export const getResidentById = async (id) => {
     try {
-        const response = await Axios.get(`/resident/${id}`)
+        const response = await Axios.get(`/residents/${id}`)
         return {
             success: true,
             data: response.data,
@@ -91,7 +91,7 @@ export const ResidentCardCondo = async (id) => {
         return {
             success: true,
             data: response.data,
-            msg: 'Resident card fetch by condo successfully'
+            msg: 'Resident cards fetch by condo successfully'
         }
     } catch (e) {
         return { 
@@ -108,7 +108,24 @@ export const ResidentCardApartment = async (id) => {
         return {
             success: true,
             data: response.data,
-            msg: 'Resident card fetch by apartment successfully'
+            msg: 'Resident cards fetch by apartment successfully'
+        }
+    } catch (e) {
+        return { 
+            success: false, 
+            data: null, 
+            msg: `${e}`
+        }
+    }
+}
+
+export const ResidentCard = async (id) => {
+    try {
+        const response = await Axios.get(`/residents/card`);
+        return {
+            success: true,
+            data: response.data,
+            msg: 'Resident cards fetch successfully'
         }
     } catch (e) {
         return { 

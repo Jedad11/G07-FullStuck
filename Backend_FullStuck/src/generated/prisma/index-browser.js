@@ -141,6 +141,8 @@ exports.Prisma.ResidentInfoScalarFieldEnum = {
   roomType: 'roomType',
   electricFee: 'electricFee',
   waterFee: 'waterFee',
+  serviceFee: 'serviceFee',
+  internetFee: 'internetFee',
   rentalPrice: 'rentalPrice'
 };
 

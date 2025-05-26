@@ -8,6 +8,8 @@ export interface ResidentCreateInput {
     roomType: string;
     electricFee: number;
     waterFee: number;
+    serviceFee: number;
+    internetFee: number;
     rentalPrice: number;
   };
   facilities?: {
@@ -195,6 +197,7 @@ export const residentModel = {
         }
       },
       select: {
+        id: true,
         residentName: true,
         info: {
           select: {
@@ -215,7 +218,7 @@ export const residentModel = {
       }
     });
   },
-  
+
   ResidentCardApartment: async () => {
     return db.resident.findMany({
       where: {
@@ -224,6 +227,7 @@ export const residentModel = {
         }
       },
       select: {
+        id: true,
         residentName: true,
         info: {
           select: {
@@ -243,5 +247,30 @@ export const residentModel = {
         }
       }
     });
+  },
+
+  ResidentCard: async () => {
+    return db.resident.findMany({
+      select: {
+        id: true,
+        residentName: true,
+        info: {
+          select: {
+            rentalPrice: true,
+            roomType: true
+          }
+        },
+        address: {
+          select: {
+            houseNumber: true,
+            street: true,
+            subDistrict: true,
+            district: true,
+            province: true,
+            postalCode: true
+          }
+        }
+      }
+    })
   }
-};
+}

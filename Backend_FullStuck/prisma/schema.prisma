@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite" 
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -24,20 +24,24 @@ model User {
   profilePicture String?
   bookings       Booking[]
   reviews        Review[]
+
   @@map("user")
 }
+
 model Resident {
-  id            Int                 @id @default(autoincrement())
-  residentName  String
-  createdAt     DateTime            @default(now())
-  info          ResidentInfo?
-  facilities    ResidentFacilities?
-  owner         ResidentOwner?
-  address       ResidentAddress?
-  bookings      Booking[]
-  reviews       Review[]
+  id           Int                 @id @default(autoincrement())
+  residentName String
+  createdAt    DateTime            @default(now())
+  info         ResidentInfo?
+  facilities   ResidentFacilities?
+  owner        ResidentOwner?
+  address      ResidentAddress?
+  bookings     Booking[]
+  reviews      Review[]
+
   @@map("resident")
 }
+
 model ResidentInfo {
   id           Int      @id @default(autoincrement())
   residentId   Int      @unique
@@ -47,26 +51,32 @@ model ResidentInfo {
   roomType     String
   electricFee  Float
   waterFee     Float
-  rentalPrice Int
+  serviceFee   Float
+  internetFee  Float
+  rentalPrice  Int
+
   @@map("resident_info")
 }
+
 model ResidentFacilities {
-  id              Int      @id @default(autoincrement())
-  residentId      Int      @unique
-  resident        Resident @relation(fields: [residentId], references: [id], onDelete: Cascade)
-  aircon          Boolean  @default(false)
-  furnished       Boolean  @default(false)
-  television      Boolean  @default(false)
-  waterHeater     Boolean  @default(false)
-  inRoomBathroom  Boolean  @default(false)
-  refrigerator    Boolean  @default(false)
-  pool            Boolean  @default(false)
-  parking         Boolean  @default(false)
-  security        Boolean  @default(false)
-  fitness         Boolean  @default(false)
-  internet        Boolean  @default(false)
+  id             Int      @id @default(autoincrement())
+  residentId     Int      @unique
+  resident       Resident @relation(fields: [residentId], references: [id], onDelete: Cascade)
+  aircon         Boolean  @default(false)
+  furnished      Boolean  @default(false)
+  television     Boolean  @default(false)
+  waterHeater    Boolean  @default(false)
+  inRoomBathroom Boolean  @default(false)
+  refrigerator   Boolean  @default(false)
+  pool           Boolean  @default(false)
+  parking        Boolean  @default(false)
+  security       Boolean  @default(false)
+  fitness        Boolean  @default(false)
+  internet       Boolean  @default(false)
+
   @@map("resident_facilities")
 }
+
 model ResidentOwner {
   id               Int      @id @default(autoincrement())
   residentId       Int      @unique
@@ -75,8 +85,10 @@ model ResidentOwner {
   ownerPhone       String
   ownerEmail       String
   ownerContactLine String?
+
   @@map("resident_owner")
 }
+
 model ResidentAddress {
   id          Int      @id @default(autoincrement())
   residentId  Int      @unique
@@ -87,8 +99,10 @@ model ResidentAddress {
   district    String
   province    String
   postalCode  String
+
   @@map("resident_address")
 }
+
 model Booking {
   id           Int      @id @default(autoincrement())
   residentId   Int
@@ -103,22 +117,25 @@ model Booking {
   bedType      String
   checkInDate  DateTime
   checkOutDate DateTime
+
   @@map("booking")
 }
+
 model Review {
-  id               Int      @id @default(autoincrement())
-  residentId       Int
-  resident         Resident @relation(fields: [residentId], references: [id])
-  userId           Int
-  user             User     @relation(fields: [userId], references: [id])
+  id                Int      @id @default(autoincrement())
+  residentId        Int
+  resident          Resident @relation(fields: [residentId], references: [id])
+  userId            Int
+  user              User     @relation(fields: [userId], references: [id])
   cleanlinessRating Float
-  serviceRating    Float
-  locationRating   Float
-  facilitiesRating Float
-  overallRating    Float
-  message          String
-  guestStatus      String
-  stayPeriod       String
-  createdAt        DateTime @default(now())
+  serviceRating     Float
+  locationRating    Float
+  facilitiesRating  Float
+  overallRating     Float
+  message           String
+  guestStatus       String
+  stayPeriod        String
+  createdAt         DateTime @default(now())
+
   @@map("review")
 }

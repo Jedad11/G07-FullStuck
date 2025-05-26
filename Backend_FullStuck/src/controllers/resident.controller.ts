@@ -112,5 +112,15 @@ export const residentController = {
       console.error('Error fetching resident:', error);
       return c.json({ message: 'Failed to fetch resident', error: (error as Error).message }, 500);
     }
+  },
+
+  ResidentCard: async (c:Context) => {
+    try {
+      const resident = await residentModel.ResidentCard();
+      return c.json(resident, 200);
+    } catch (error) {
+      console.error('Error fetching resident:', error);
+      return c.json({ message: 'Failed to fetch resident', error: (error as Error).message }, 500);
+    }
   }
 };

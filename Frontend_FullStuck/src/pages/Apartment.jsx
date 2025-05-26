@@ -45,11 +45,12 @@ function Apartment() {
 
       <div className="space-y-4">
         {sortedApartments.map((apartment, index) => {
-          const { residentName, info, address } = apartment;
+          const { id, residentName, info, address } = apartment;
           const fullAddress = `${address?.street || ""}, ${address?.subDistrict || ""}, ${address?.district || ""}, ${address?.province || ""} ${address?.postalCode || ""}`;
           return (
             <Card
-              key={index}
+              key={id || index}
+              id={id}
               Name={residentName}
               Price={info?.rentalPrice || "N/A"}
               UnitType={info?.roomType || "N/A"}

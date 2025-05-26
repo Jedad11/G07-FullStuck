@@ -1,43 +1,34 @@
-const ListingCard = () => {
+const ListingCard = ({ residentName, info }) => {
+  if (!info) return null; // ถ้ายังโหลดไม่เสร็จ ไม่ render
+
   return (
-    <div className="bg-[#F3F8FE] w-[620px]  md:w-[701px] lg:w-[598px] rounded-xl shadow-md p-6  ">
+    <div className="bg-[#F3F8FE] w-[620px] md:w-[701px] lg:w-[598px] rounded-xl shadow-md p-6">
       <h2 className="text-center text-xl font-semibold mb-6">Listing Information</h2>
       <div className="space-y-[30px] md:space-y-[35px] lg:space-y-[40px] text-[12px] md:text-[18px] lg:text-[24px]">
         <div className="flex justify-between">
           <span className="font-semibold">Name</span>
-          <span>The Cube Pracha Uthit</span>
+          <span>{residentName}</span>
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Rental Price</span>
-          <span>7000-8000 THB/Month</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="font-semibold">Building</span>
-          <span>Building A</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="font-semibold">Room type</span>
-          <span>1 Bed</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="font-semibold">Room number</span>
-          <span>1234</span>
+          <span>{info.rentalPrice} THB/Month</span>
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Electric price</span>
-          <span>4 THB/unit</span>
+          <span>{info.electricFee} THB/unit</span>
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Water price</span>
-          <span>18 THB/unit, min 100 THB</span>
+          <span>{info.waterFee} THB/unit</span>
         </div>
+
         <div className="flex justify-between">
           <span className="font-semibold">Service fee</span>
-          <span>100 THB/month</span>
+          <span>{info.serviceFee} THB/month</span>
         </div>
         <div className="flex justify-between">
           <span className="font-semibold">Internet</span>
-          <span>200 THB/month</span>
+          <span>{info.internetFee} THB/month</span>
         </div>
       </div>
     </div>

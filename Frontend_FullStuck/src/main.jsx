@@ -15,7 +15,6 @@ import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
 import Booking from "./pages/Booking";
 import Recommend from "./pages/Recommend";
-//c
 
 const router = createBrowserRouter([
   {
@@ -36,11 +35,11 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path:"/ResidentDetail",
+        path:"/ResidentDetail/:id",
         element: <ResidentDetail />,
       },
       {
-        path: "/booking",
+        path: "/booking/:id",
         element: <Booking/>
       },
       ,{

@@ -3954,6 +3954,8 @@ export namespace Prisma {
     residentId: number | null
     electricFee: number | null
     waterFee: number | null
+    serviceFee: number | null
+    internetFee: number | null
     rentalPrice: number | null
   }
 
@@ -3962,6 +3964,8 @@ export namespace Prisma {
     residentId: number | null
     electricFee: number | null
     waterFee: number | null
+    serviceFee: number | null
+    internetFee: number | null
     rentalPrice: number | null
   }
 
@@ -3973,6 +3977,8 @@ export namespace Prisma {
     roomType: string | null
     electricFee: number | null
     waterFee: number | null
+    serviceFee: number | null
+    internetFee: number | null
     rentalPrice: number | null
   }
 
@@ -3984,6 +3990,8 @@ export namespace Prisma {
     roomType: string | null
     electricFee: number | null
     waterFee: number | null
+    serviceFee: number | null
+    internetFee: number | null
     rentalPrice: number | null
   }
 
@@ -3995,6 +4003,8 @@ export namespace Prisma {
     roomType: number
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
     _all: number
   }
@@ -4005,6 +4015,8 @@ export namespace Prisma {
     residentId?: true
     electricFee?: true
     waterFee?: true
+    serviceFee?: true
+    internetFee?: true
     rentalPrice?: true
   }
 
@@ -4013,6 +4025,8 @@ export namespace Prisma {
     residentId?: true
     electricFee?: true
     waterFee?: true
+    serviceFee?: true
+    internetFee?: true
     rentalPrice?: true
   }
 
@@ -4024,6 +4038,8 @@ export namespace Prisma {
     roomType?: true
     electricFee?: true
     waterFee?: true
+    serviceFee?: true
+    internetFee?: true
     rentalPrice?: true
   }
 
@@ -4035,6 +4051,8 @@ export namespace Prisma {
     roomType?: true
     electricFee?: true
     waterFee?: true
+    serviceFee?: true
+    internetFee?: true
     rentalPrice?: true
   }
 
@@ -4046,6 +4064,8 @@ export namespace Prisma {
     roomType?: true
     electricFee?: true
     waterFee?: true
+    serviceFee?: true
+    internetFee?: true
     rentalPrice?: true
     _all?: true
   }
@@ -4144,6 +4164,8 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
     _count: ResidentInfoCountAggregateOutputType | null
     _avg: ResidentInfoAvgAggregateOutputType | null
@@ -4174,6 +4196,8 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    serviceFee?: boolean
+    internetFee?: boolean
     rentalPrice?: boolean
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residentInfo"]>
@@ -4186,6 +4210,8 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    serviceFee?: boolean
+    internetFee?: boolean
     rentalPrice?: boolean
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residentInfo"]>
@@ -4198,6 +4224,8 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    serviceFee?: boolean
+    internetFee?: boolean
     rentalPrice?: boolean
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residentInfo"]>
@@ -4210,10 +4238,12 @@ export namespace Prisma {
     roomType?: boolean
     electricFee?: boolean
     waterFee?: boolean
+    serviceFee?: boolean
+    internetFee?: boolean
     rentalPrice?: boolean
   }
 
-  export type ResidentInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residentId" | "residentType" | "building" | "roomType" | "electricFee" | "waterFee" | "rentalPrice", ExtArgs["result"]["residentInfo"]>
+  export type ResidentInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residentId" | "residentType" | "building" | "roomType" | "electricFee" | "waterFee" | "serviceFee" | "internetFee" | "rentalPrice", ExtArgs["result"]["residentInfo"]>
   export type ResidentInfoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     resident?: boolean | ResidentDefaultArgs<ExtArgs>
   }
@@ -4237,6 +4267,8 @@ export namespace Prisma {
       roomType: string
       electricFee: number
       waterFee: number
+      serviceFee: number
+      internetFee: number
       rentalPrice: number
     }, ExtArgs["result"]["residentInfo"]>
     composites: {}
@@ -4669,6 +4701,8 @@ export namespace Prisma {
     readonly roomType: FieldRef<"ResidentInfo", 'String'>
     readonly electricFee: FieldRef<"ResidentInfo", 'Float'>
     readonly waterFee: FieldRef<"ResidentInfo", 'Float'>
+    readonly serviceFee: FieldRef<"ResidentInfo", 'Float'>
+    readonly internetFee: FieldRef<"ResidentInfo", 'Float'>
     readonly rentalPrice: FieldRef<"ResidentInfo", 'Int'>
   }
     
@@ -10962,6 +10996,8 @@ export namespace Prisma {
     roomType: 'roomType',
     electricFee: 'electricFee',
     waterFee: 'waterFee',
+    serviceFee: 'serviceFee',
+    internetFee: 'internetFee',
     rentalPrice: 'rentalPrice'
   };
 
@@ -11250,6 +11286,8 @@ export namespace Prisma {
     roomType?: StringFilter<"ResidentInfo"> | string
     electricFee?: FloatFilter<"ResidentInfo"> | number
     waterFee?: FloatFilter<"ResidentInfo"> | number
+    serviceFee?: FloatFilter<"ResidentInfo"> | number
+    internetFee?: FloatFilter<"ResidentInfo"> | number
     rentalPrice?: IntFilter<"ResidentInfo"> | number
     resident?: XOR<ResidentScalarRelationFilter, ResidentWhereInput>
   }
@@ -11262,6 +11300,8 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
     resident?: ResidentOrderByWithRelationInput
   }
@@ -11277,6 +11317,8 @@ export namespace Prisma {
     roomType?: StringFilter<"ResidentInfo"> | string
     electricFee?: FloatFilter<"ResidentInfo"> | number
     waterFee?: FloatFilter<"ResidentInfo"> | number
+    serviceFee?: FloatFilter<"ResidentInfo"> | number
+    internetFee?: FloatFilter<"ResidentInfo"> | number
     rentalPrice?: IntFilter<"ResidentInfo"> | number
     resident?: XOR<ResidentScalarRelationFilter, ResidentWhereInput>
   }, "id" | "residentId">
@@ -11289,6 +11331,8 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
     _count?: ResidentInfoCountOrderByAggregateInput
     _avg?: ResidentInfoAvgOrderByAggregateInput
@@ -11308,6 +11352,8 @@ export namespace Prisma {
     roomType?: StringWithAggregatesFilter<"ResidentInfo"> | string
     electricFee?: FloatWithAggregatesFilter<"ResidentInfo"> | number
     waterFee?: FloatWithAggregatesFilter<"ResidentInfo"> | number
+    serviceFee?: FloatWithAggregatesFilter<"ResidentInfo"> | number
+    internetFee?: FloatWithAggregatesFilter<"ResidentInfo"> | number
     rentalPrice?: IntWithAggregatesFilter<"ResidentInfo"> | number
   }
 
@@ -11871,6 +11917,8 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
     resident: ResidentCreateNestedOneWithoutInfoInput
   }
@@ -11883,6 +11931,8 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
   }
 
@@ -11892,6 +11942,8 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    serviceFee?: FloatFieldUpdateOperationsInput | number
+    internetFee?: FloatFieldUpdateOperationsInput | number
     rentalPrice?: IntFieldUpdateOperationsInput | number
     resident?: ResidentUpdateOneRequiredWithoutInfoNestedInput
   }
@@ -11904,6 +11956,8 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    serviceFee?: FloatFieldUpdateOperationsInput | number
+    internetFee?: FloatFieldUpdateOperationsInput | number
     rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
@@ -11915,6 +11969,8 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
   }
 
@@ -11924,6 +11980,8 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    serviceFee?: FloatFieldUpdateOperationsInput | number
+    internetFee?: FloatFieldUpdateOperationsInput | number
     rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
@@ -11935,6 +11993,8 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    serviceFee?: FloatFieldUpdateOperationsInput | number
+    internetFee?: FloatFieldUpdateOperationsInput | number
     rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
@@ -12618,6 +12678,8 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
   }
 
@@ -12626,6 +12688,8 @@ export namespace Prisma {
     residentId?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
   }
 
@@ -12637,6 +12701,8 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
   }
 
@@ -12648,6 +12714,8 @@ export namespace Prisma {
     roomType?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
   }
 
@@ -12656,6 +12724,8 @@ export namespace Prisma {
     residentId?: SortOrder
     electricFee?: SortOrder
     waterFee?: SortOrder
+    serviceFee?: SortOrder
+    internetFee?: SortOrder
     rentalPrice?: SortOrder
   }
 
@@ -13700,6 +13770,8 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
   }
 
@@ -13710,6 +13782,8 @@ export namespace Prisma {
     roomType: string
     electricFee: number
     waterFee: number
+    serviceFee: number
+    internetFee: number
     rentalPrice: number
   }
 
@@ -13883,6 +13957,8 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    serviceFee?: FloatFieldUpdateOperationsInput | number
+    internetFee?: FloatFieldUpdateOperationsInput | number
     rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13893,6 +13969,8 @@ export namespace Prisma {
     roomType?: StringFieldUpdateOperationsInput | string
     electricFee?: FloatFieldUpdateOperationsInput | number
     waterFee?: FloatFieldUpdateOperationsInput | number
+    serviceFee?: FloatFieldUpdateOperationsInput | number
+    internetFee?: FloatFieldUpdateOperationsInput | number
     rentalPrice?: IntFieldUpdateOperationsInput | number
   }
 

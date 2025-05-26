@@ -1,26 +1,67 @@
-import React from "react";
-
-import Card from '../component/Card.jsx'
-import Back from '../component/Back.jsx'
+import React, { useState, useEffect, useMemo } from "react";
+import Card from '../component/Card.jsx';
+import Back from '../component/Back.jsx';
 import Sort from "../component/Sort.jsx";
+import * as residentAPI from "../api/residentAPI.js";
 
 function Recommend() {
+  const [recommendedRooms, setRecommendedRooms] = useState([]);
+  const [sortType, setSortType] = useState("Lastest update");
+
+  const handleFetchRecommended = async () => {
+    try {
+      const response = await residentAPI.ResidentCard(); // เรียก API ที่คุณต้องการ
+      setRecommendedRooms(Array.isArray(response.data) ? response.data : []);
+    } catch (error) {
+      console.error("Error loading recommended rooms:", error);
+    }
+  };
+
+  useEffect(() => {
+    handleFetchRecommended();
+  }, []);
+
+  const sortedRooms = useMemo(() => {
+    const sorted = [...recommendedRooms];
+    switch (sortType) {
+      case "Highest price":
+        return sorted.sort((a, b) => (b.info?.rentalPrice || 0) - (a.info?.rentalPrice || 0));
+      case "Lowest price":
+        return sorted.sort((a, b) => (a.info?.rentalPrice || 0) - (b.info?.rentalPrice || 0));
+      default:
+        return sorted;
+    }
+  }, [recommendedRooms, sortType]);
+
   return (
     <div className='md:max-w-[768px] xl:max-w-[1306px] mx-auto'>
-      <Back/>
-      <h1 className='xl:text-[50px] md:text-[24px] text-[20px] font-bold leading-snug ml-18'>Recommendation room near 
-      <br />King Mongkut's University of Technology Thonburi</h1>
+      <Back />
+      <h1 className='xl:text-[50px] md:text-[24px] text-[20px] font-bold leading-snug ml-18'>
+        Recommendation room near <br />
+        King Mongkut's University of Technology Thonburi
+      </h1>
       <div className="h-px bg-gray-300 my-4" />
-      <Sort/>
+      <Sort onSortChange={setSortType} />
+
       <div className="space-y-4">
-        <Card Name="A" Floor="8" Price="8,500" />
-        <Card Name="B" Floor="10" Price="10,500" />
-        <Card Name="C" Floor="9" Price="4,000" className="hidden md:block" />
-        <Card Name="D" Floor="8" Price="5,600" className="hidden xl:block" />
-        <Card Name="E" Floor="5" Price="2,000" className="hidden xl:block" />
+        {sortedRooms.map((room, index) => {
+          const { id, residentName, info, address } = room;
+          const fullAddress = `${address?.street || ""}, ${address?.subDistrict || ""}, ${address?.district || ""}, ${address?.province || ""} ${address?.postalCode || ""}`;
+
+          return (
+            <Card
+              key={id || index}
+              id={id}
+              Name={residentName}
+              Price={info?.rentalPrice || "N/A"}
+              UnitType={info?.roomType || "N/A"}
+              Address={fullAddress}
+            />
+          );
+        })}
       </div>
     </div>
-  )
+  );
 }
 
-export default Recommend
+export default Recommend;

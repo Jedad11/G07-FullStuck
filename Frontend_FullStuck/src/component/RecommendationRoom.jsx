@@ -74,7 +74,7 @@ const RecommendationRoom = () => {
       </div>
       <div className="text-center mt-8">
         <NavLink to='/recommend'>
-          <button className="bg-[#362518] text-white px-6 py-2 rounded-md hover:bg-brown-700 transition-all">
+          <button className="bg-[#362518] text-white px-6 py-2 rounded-md hover:bg-brown-700 transition-all cursor-pointer">
             View More
           </button>
         </NavLink>
