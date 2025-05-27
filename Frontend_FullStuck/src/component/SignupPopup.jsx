@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
 import SignIn from "./SigninPopup";
 import { useForm } from "react-hook-form";
-import { ThemeContext } from "../contexts/auth";
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import * as UserAPI from "../api/userAPI";
 import { z } from "zod";
@@ -11,7 +10,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const SignupPop = ({ isOpen, onClose, openSignIn }) => {
   const [isSignIn, setSignIn] = useState(false);
-  const { setAuth } = useContext(ThemeContext);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordAgain, setShowPasswordAgain] = useState(false);
 
@@ -45,7 +43,6 @@ const SignupPop = ({ isOpen, onClose, openSignIn }) => {
       alert(response.msg);
       return;
     }
-    setAuth(true);
     reset();
     onClose();
   };

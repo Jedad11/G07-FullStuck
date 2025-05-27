@@ -19,18 +19,19 @@ const SignIn = ({ isOpen, onClose, openSignUp }) => {
   };
   const {
     register, handleSubmit, formState: { errors }, reset } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-  const submit = async (formData) => {    
+      defaultValues: {
+        email: "",
+        password: "",
+      },
+    });
+  const submit = async (formData) => {
     const response = await authAPI.Login(formData.email, formData.password);
     if (!response.success) {
       alert(response.msg);
       return;
     }
-    setAuth(true);
+    const token = response.data.data;
+    setAuth(token);
     reset();
     onClose();
   };

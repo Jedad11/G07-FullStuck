@@ -7,14 +7,14 @@ import Condo from "./pages/Condo";
 import Apartment from "./pages/Apartment";
 import Contact from "./pages/Contact";
 import ResidentDetail from "./pages/ResidentDetail";
-import NavBar from "./component/NavBar";
 import "./index.css";
 import Writereview from "./pages/Writereview";
 import { ThemeProvider } from "@material-tailwind/react";
-import { ThemeProviderContext } from "./contexts/auth";
 import AccountSetting from "./component/AccoutSetting";
 import Booking from "./pages/Booking";
 import Recommend from "./pages/Recommend";
+import { AuthProvider } from "./contexts/auth";
+
 
 const router = createBrowserRouter([
   {
@@ -35,44 +35,36 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path:"/ResidentDetail/:id",
+        path: "/ResidentDetail/:id",
         element: <ResidentDetail />,
       },
       {
         path: "/booking/:id",
-        element: <Booking/>
+        element: <Booking />
       },
-      ,{
+      , {
         path: "/recommend",
-        element: <Recommend/>
+        element: <Recommend />
       }
     ],
   },
-  // {
-  //   path: "/signin",
-  //   element: <SignIn />,
-  // },
-  // {
-  //   path: "/signin",
-  //   element: <SignIn />,
-  // },
   {
     path: "/review",
-    element: <Writereview/>
+    element: <Writereview />
   },
   {
     path: "/mock",
-    element: <AccountSetting/>
+    element: <AccountSetting />
   },
-  
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
-      <ThemeProviderContext>
+      <AuthProvider>
         <RouterProvider router={router} />
-      </ThemeProviderContext>
+      </AuthProvider>
     </ThemeProvider>
   </StrictMode>
 );

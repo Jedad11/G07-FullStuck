@@ -10,7 +10,7 @@ import { ThemeContext } from "../contexts/auth";
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import LogoutPopup from "./LogoutPopup.jsx";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 import {
   DropdownMenu,
@@ -84,29 +84,29 @@ const NavBar = () => {
 
             {isAuth ? (
               <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="secondary"
-                      size="icon"
-                      className="rounded-full hidden md:flex"
-                    >
-                      <CircleUser className="h-5 w-5" />
-                      <span className="sr-only">Toggle user menu</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full hidden md:flex"
+                  >
+                    <CircleUser className="h-5 w-5" />
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
 
-                    <Link to="/mock">
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
-                    </Link>
+                  <Link to="/mock">
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                  </Link>
 
-                    <DropdownMenuItem onClick={() => setLogOutOpen(true)}>
-                      Log out
-                    </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLogOutOpen(true)}>
+                    Log out
+                  </DropdownMenuItem>
 
-                  </DropdownMenuContent>
+                </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <div className="relative hidden md:flex space-x-3">

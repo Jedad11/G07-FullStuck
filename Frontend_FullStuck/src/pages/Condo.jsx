@@ -14,7 +14,7 @@ function Condo() {
       const response = await residentAPI.ResidentCardCondo()
       setCondos(Array.isArray(response.data) ? response.data : [])
     } catch (error) {
-      console.error("Error loading todos:", error);
+      console.error("Error loading condos:", error);
     }
   }
 
