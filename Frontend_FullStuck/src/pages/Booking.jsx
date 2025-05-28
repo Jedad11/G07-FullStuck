@@ -19,6 +19,19 @@ const Booking = () => {
         }
     }
 
+    function parseJwt(token) {
+        try {
+            return JSON.parse(atob(token.split(".")[1]));
+        } catch (e) {
+            return null;
+        }
+    }
+
+    const token = localStorage.getItem("token");
+    const payload = parseJwt(token);
+    const userId = payload ? payload.userId : null;
+    
+
     useEffect(() => {
         handleFetchResidentData();
     }, []);
@@ -27,7 +40,7 @@ const Booking = () => {
             <h1 className="flex justify-center font-semibold text-[48px] mb-[100px]">Booking Information</h1>
             <div className="flex flex-col lg:flex-row lg:justify-center lg:items-start lg:space-x-12 ">
                 <div className="w-full lg:max-w-[600px] mb-5">
-                    <DetailsBox />
+                    <DetailsBox userId={userId} residentId={id}/>
                 </div>
                 <div className="flex flex-col space-y-6 w-full lg:max-w-[400px]">
                     {resident && resident.info && (
@@ -38,7 +51,7 @@ const Booking = () => {
                                 address={resident.address}
                             />
                             <BookingDate />
-                            <PaymentBox rentalPrice={resident.info.rentalPrice} serviceFee={resident.info.serviceFee}/>
+                            <PaymentBox rentalPrice={resident.info.rentalPrice} serviceFee={resident.info.serviceFee} />
                         </>
                     )}
                 </div>

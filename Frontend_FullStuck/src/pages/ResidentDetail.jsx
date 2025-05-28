@@ -69,7 +69,7 @@ const ResidentDetail = () => {
                 </div>
 
                 <div className="mt-[100px]">
-                    <WriteReview />
+                    <WriteReview residentId={id}/>
                     <Satisfact />
                 </div>
                 <Comments />

@@ -1,6 +1,6 @@
 import ReviewButton from "./ReviewButton"
 
-const WriteReview = () => {
+const WriteReview = ({ residentId }) => {
     return (
         <div>
             <h1 className="font-semibold text-[36px] sm:text-[30px] md:text-[36px] mb-[30px] md:mb-[50px]">Rate Reviews</h1>
@@ -11,10 +11,10 @@ const WriteReview = () => {
                     </div>
                     <span className="text-[30px] sm:text-[24px] md:text-[24px] font-semibold text-[#4B2C20]">
                         Excellent
-                    </span>   
+                    </span>
                 </div>
                 <div className="flex items-center lg:justify-end justify-start mt-6 lg:mt-[-80px]">
-                    <ReviewButton/>
+                    <ReviewButton id={residentId} />
                 </div>
             </div>
         </div>

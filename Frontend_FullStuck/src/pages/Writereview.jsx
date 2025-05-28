@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Select, Option, Rating } from "@material-tailwind/react";
 import PopupReview from "../component/PopupReview";
 import * as ReviewAPI from "../api/reviewAPI.js"
+import { useParams } from "react-router";
 
 function Writereview() {
   const [guestStatus, setGuestStatus] = useState("");
@@ -14,6 +15,19 @@ function Writereview() {
   });
   const [message, setMessage] = useState("");
   const [popup, setPopup] = useState(false);
+  
+  const { id } = useParams();
+  function parseJwt(token) {
+    try {
+      return JSON.parse(atob(token.split(".")[1]));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  const token = localStorage.getItem("token");
+  const payload = parseJwt(token);
+  const userId = payload ? payload.userId : null;
 
   const handleSubmit = async () => {
     const reviewData = {

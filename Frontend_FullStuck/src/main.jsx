@@ -49,7 +49,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/review",
+    path: "/review/:id",
     element: <Writereview />
   },
   {
