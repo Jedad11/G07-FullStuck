@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 
 import TitleSection from "../component/ResDetailPage/TitleSection";
@@ -42,7 +42,6 @@ const ResidentDetail = () => {
                 </div>
                 <div className="grid grid-cols-1 justify-center lg:grid-cols-2 gap-4 mt-[50px]">
                     <div>
-                        {/* ส่ง residentName กับ address ไปให้ TitleSection */}
                         <TitleSection residentName={resident.residentName} address={resident.address} residentType={resident.info.residentType} />
                         <ResidentImage />
                     </div>
@@ -61,7 +60,7 @@ const ResidentDetail = () => {
                 <div className="grid grid-cols-1 justify-center lg:grid-cols-2 gap-4 mt-[100px]">
                     <div>
                         <FacilitiesSection facilities={resident.facilities} />
-                        <ReserveButton id={id}/>
+                        <ReserveButton id={id} />
                     </div>
 
                     <div className="flex justify-center lg:justify-end ">

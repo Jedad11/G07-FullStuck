@@ -4,6 +4,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as userAPI from "../api/userAPI"
 import { NavLink, useNavigate } from "react-router-dom";
+import { CircleUser } from "lucide-react";
+
 
 // Zod schema
 const accountSchema = z
@@ -26,10 +28,12 @@ const accountSchema = z
       message: "Passwords do not match",
     }
   );
+
 const AccountSetting = () => {
   const fileInputRef = useRef(null);
   const [user, setUser] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null);
+  const [profileImageBase64, setProfileImageBase64] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -41,14 +45,33 @@ const AccountSetting = () => {
     resolver: zodResolver(accountSchema),
   });
 
+  // Function to convert file to base64
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   const onSubmit = async (data) => {
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([_, value]) => value !== "" && value !== undefined)
     );
 
-    console.log("📦 ข้อมูลฟอร์มที่ส่ง:", filteredData);
-    console.log("🖼️ รูปภาพที่แนบมาด้วย:", selectedFile);
+    // Convert image to base64 if file is selected
+    let imageBase64 = null;
+    if (selectedFile) {
+      try {
+        imageBase64 = await convertFileToBase64(selectedFile);
+        console.log("📷 รูปภาพ Base64:", imageBase64.substring(0, 100) + "...");
+      } catch (error) {
+        console.error("Error converting image to base64:", error);
+        alert("Failed to process image");
+        return;
+      }
+    }
 
     const response = await userAPI.updateUser(
       userId,
@@ -56,29 +79,40 @@ const AccountSetting = () => {
       filteredData.lastName,
       filteredData.phoneNumber,
       filteredData.email,
-      selectedFile
+      filteredData.password, // Fixed: now passing password correctly
+      imageBase64 // Fixed: passing base64 string instead of File object
     );
 
     reset();
     setSelectedFile(null);
+    setProfileImageBase64(null);
 
     if (response.success) {
       navigate("/");
     } else {
-      alert("Failed to update user");
+      alert("Failed to update user: " + response.msg);
     }
   };
 
   const handleCancel = () => {
     reset();
+    setSelectedFile(null);
+    setProfileImageBase64(null);
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
-    console.log("📷 รูปภาพที่เลือก:", file);
+    if (file) {
+      setSelectedFile(file);
+      // Preview the selected image
+      try {
+        const base64 = await convertFileToBase64(file);
+        setProfileImageBase64(base64);
+      } catch (error) {
+        console.error("Error previewing image:", error);
+      }
+    }
   };
-
 
   function parseJwt(token) {
     try {
@@ -97,6 +131,8 @@ const AccountSetting = () => {
       try {
         const response = await userAPI.getUserById(userId);
         setUser(response.data);
+        console.log(response.data);
+
         reset({
           firstName: response.data.firstName || "",
           lastName: response.data.lastName || "",
@@ -108,7 +144,9 @@ const AccountSetting = () => {
       }
     };
 
-    handleFetchUserData();
+    if (userId) {
+      handleFetchUserData();
+    }
   }, [userId, reset]);
 
   return (
@@ -120,7 +158,24 @@ const AccountSetting = () => {
           </h1>
 
           <div className="flex flex-col items-center mb-6">
-            <div className="w-20 h-20 bg-gray-300 rounded-full mb-2"></div>
+            <div className="w-20 h-20 rounded-full mb-2 overflow-hidden flex items-center justify-center bg-gray-200">
+              {profileImageBase64 ? (
+                <img
+                  src={profileImageBase64}
+                  alt="Profile Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : user?.profilePicture ? (
+                <img
+                  src={user.profilePicture}
+                  alt="Current Profile"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <CircleUser className="h-12 w-12 text-gray-500" />
+              )}
+            </div>
+
             <div>
               <input
                 type="file"
@@ -193,6 +248,7 @@ const AccountSetting = () => {
               <input
                 type="password"
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                placeholder="Leave blank to keep current password"
                 {...register("password")}
               />
               {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
@@ -204,6 +260,7 @@ const AccountSetting = () => {
               <input
                 type="password"
                 className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                placeholder="Leave blank to keep current password"
                 {...register("confirmPassword")}
               />
               {errors.confirmPassword && (

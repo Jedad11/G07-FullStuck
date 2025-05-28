@@ -15,6 +15,7 @@ export interface UserUpdateInput {
   lastName?: string;
   phoneNumber?: string;
   email?: string;
+  password?: string; // Added password field for updates
   profilePicture?: string;
 }
 
@@ -39,7 +40,7 @@ export const userModel = {
     return db.user.create({
       data:{
         ...data,
-      password: hashPassword,
+        password: hashPassword,
       }
     });
   },
@@ -69,9 +70,25 @@ export const userModel = {
 
   // Update user
   updateUser: async (id: number, data: UserUpdateInput) => {
+    // Create a copy of data to modify
+    const updateData: Partial<UserUpdateInput> = { ...data };
+    
+    // Hash password if it's being updated
+    if (updateData.password) {
+      updateData.password = await hash(updateData.password, 10);
+    }
+    
+    // Remove undefined/empty values to prevent Prisma errors
+    Object.keys(updateData).forEach((key) => {
+      const typedKey = key as keyof UserUpdateInput;
+      if (updateData[typedKey] === undefined || updateData[typedKey] === null || updateData[typedKey] === '') {
+        delete updateData[typedKey];
+      }
+    });
+
     return db.user.update({
       where: { id },
-      data,
+      data: updateData,
     });
   },
 

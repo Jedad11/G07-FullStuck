@@ -26,6 +26,8 @@ const SignIn = ({ isOpen, onClose, openSignUp }) => {
     });
   const submit = async (formData) => {
     const response = await authAPI.Login(formData.email, formData.password);
+    console.log(formData);
+    
     if (!response.success) {
       alert(response.msg);
       return;

@@ -18,7 +18,6 @@ function PopupReview({ isOpen }) {
                 Back
             </button>
         </NavLink>
-
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import Logo from "../image/logorestrent.png";
 import { IoIosMenu } from "react-icons/io";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { NavLink, Link, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SignIn from "./SigninPopup";
 import Signup from "./SignupPopup";
 import { ThemeContext } from "../contexts/auth";
@@ -11,6 +11,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import LogoutPopup from "./LogoutPopup.jsx";
 import { useNavigate } from "react-router-dom";
+import * as userAPI from "../api/userAPI"
 
 import {
   DropdownMenu,
@@ -28,14 +29,47 @@ const NavBar = () => {
   const [isSignUpOpen, setSignUpOpen] = useState(false);
   const { isAuth, unAuth } = useContext(ThemeContext);
   const [isLogOutOpen, setLogOutOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const payload = parseJwt(token);
+  const userId = payload ? payload.userId : null;
+  const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
+
+  function parseJwt(token) {
+    try {
+      return JSON.parse(atob(token.split(".")[1]));
+    } catch (e) {
+      return null;
+    }
+  }
+
   const handleLogout = () => {
     unAuth();
     setLogOutOpen(false); // Close Popup
     navigate("/"); // Back to HomePage
   };
-  //ccc
-  const Menus = ["Accout Setting", "Logout"];
+
+  const handleFetchUserData = async () => {
+    try {
+      const response = await userAPI.getUserById(userId);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error loading user data:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (isAuth) {
+      handleFetchUserData();
+    } else {
+      setUser(null); 
+    }
+  }, [isAuth]);
+
+
+  const Menus = ["Account Setting", "Logout"];
+
   return (
     <>
       <div className="bg-[#362518] font-Inter py-4 px-6">
@@ -88,18 +122,28 @@ const NavBar = () => {
                   <Button
                     variant="secondary"
                     size="icon"
-                    className="rounded-full hidden md:flex"
+                    className="rounded-full hidden md:flex p-0 overflow-hidden"
                   >
-                    <CircleUser className="h-5 w-5" />
+                    {user?.profilePicture ? (
+                      <img
+                        src={user.profilePicture}
+                        alt={`${user.firstName} ${user.lastName}`}
+                        className="h-8 w-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      <CircleUser className="h-5 w-5" />
+                    )}
                     <span className="sr-only">Toggle user menu</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>
+                    {user ? `${user.firstName} ${user.lastName}` : 'My Account'}
+                  </DropdownMenuLabel>
                   <DropdownMenuSeparator />
 
                   <Link to="/mock">
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <DropdownMenuItem>Account setting</DropdownMenuItem>
                   </Link>
 
                   <DropdownMenuItem onClick={() => setLogOutOpen(true)}>
