@@ -3,6 +3,7 @@ import { Select, Option, Rating } from "@material-tailwind/react";
 import PopupReview from "../component/PopupReview";
 import * as ReviewAPI from "../api/reviewAPI.js"
 import { useParams } from "react-router";
+import { NavLink } from "react-router";
 
 function Writereview() {
   const [guestStatus, setGuestStatus] = useState("");
@@ -15,7 +16,7 @@ function Writereview() {
   });
   const [message, setMessage] = useState("");
   const [popup, setPopup] = useState(false);
-  
+
   const { id } = useParams();
   function parseJwt(token) {
     try {
@@ -29,27 +30,46 @@ function Writereview() {
   const payload = parseJwt(token);
   const userId = payload ? payload.userId : null;
 
+  const handleRatingChange = (category, value) => {
+    setRatings((prevRatings) => ({
+      ...prevRatings,
+      [category]: value,
+    }));
+  };
+
+
   const handleSubmit = async () => {
+    if (!guestStatus || !stayPeriod || !message) {
+      alert("Please complete all fields.");
+      return;
+    }
+
+    const overallRating =
+      (ratings.Cleanliness + ratings.Service + ratings.Location + ratings.Facilities) / 4;
+
     const reviewData = {
+      residentId: parseInt(id), // from useParams
+      userId,                   // from token
+      cleanlinessRating: ratings.Cleanliness,
+      serviceRating: ratings.Service,
+      locationRating: ratings.Location,
+      facilitiesRating: ratings.Facilities,
+      overallRating,
+      message,
       guestStatus,
       stayPeriod,
-      ratings,
-      message,
     };
-    console.log("Submitted Review:", reviewData);
-    const response = await ReviewAPI.createReview(guestStatus, stayPeriod, ratings, message);
-    if(!response.success){
-      alert(response.msg)
+    const response = await ReviewAPI.createReview(reviewData);
+    console.log(response);
+    
+    if (!response.success) {
+      alert(response.msg);
+      return;
     }
+
     setPopup(true);
   };
 
-  const handleRatingChange = (label, value) => {
-    setRatings((prev) => ({
-      ...prev,
-      [label]: value,
-    }));
-  };
 
   const handleCancel = () => {
     setGuestStatus("");
@@ -109,7 +129,7 @@ function Writereview() {
                   <Rating
                     value={ratings[label]}
                     onChange={(value) =>
-                      handleRatingChange(label,value)}
+                      handleRatingChange(label, value)}
                   />
                 </div>
               )
@@ -136,17 +156,19 @@ function Writereview() {
           >
             Confirm
           </button>
-          <button
-            className="border border-[#362518] text-[#362518] hover:bg-gray-100 px-6 py-2 rounded-md w-full md:w-auto"
-            onClick={handleCancel}
-          >
-            Cancel
-          </button>
+          <NavLink to={`/ResidentDetail/${id}`}>
+            <button
+              className="border border-[#362518] text-[#362518] hover:bg-gray-100 px-6 py-2 rounded-md w-full md:w-auto"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          </NavLink>
         </div>
       </div>
 
       {/* Popup */}
-      <PopupReview isOpen={popup} />
+      <PopupReview isOpen={popup} id={id} />
     </div>
   );
 }

@@ -9,9 +9,9 @@ export const getAllResidents = async () => {
             msg: 'Residents fetch successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -19,16 +19,16 @@ export const getAllResidents = async () => {
 
 export const createResident = async (Information) => {
     try {
-        const response = await Axios.post('/residents',Information)
+        const response = await Axios.post('/residents', Information)
         return {
             success: true,
             data: response.data,
             msg: 'Resident created successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -43,9 +43,9 @@ export const getResidentById = async (id) => {
             msg: 'Resident fetch successfuklly'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -60,9 +60,9 @@ export const updateResident = async (id, Information) => {
             msg: 'Resident updated successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -77,9 +77,9 @@ export const deleteResident = async (id) => {
             msg: 'Resident deleted successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -94,9 +94,9 @@ export const ResidentCardCondo = async (id) => {
             msg: 'Resident cards fetch by condo successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -111,9 +111,9 @@ export const ResidentCardApartment = async (id) => {
             msg: 'Resident cards fetch by apartment successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }
@@ -128,9 +128,26 @@ export const ResidentCard = async (id) => {
             msg: 'Resident cards fetch successfully'
         }
     } catch (e) {
-        return { 
-            success: false, 
-            data: null, 
+        return {
+            success: false,
+            data: null,
+            msg: `${e}`
+        }
+    }
+}
+
+export const ResidentWithAvgRating = async () => {
+    try {
+        const response = await Axios.get(`/residents/with-rating`);
+        return {
+            success: true,
+            data: response.data,
+            msg: 'Residents with average rating fetched successfully'
+        }
+    } catch (e) {
+        return {
+            success: false,
+            data: null,
             msg: `${e}`
         }
     }

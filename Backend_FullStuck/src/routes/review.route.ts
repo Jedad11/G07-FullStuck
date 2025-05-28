@@ -10,5 +10,6 @@ reviewRouter.patch("/:id", reviewController.updateReview);
 reviewRouter.delete("/:id", reviewController.deleteReview);
 reviewRouter.get("/user/:userId", reviewController.getReviewsByUserId);
 reviewRouter.get("/resident/:residentId", reviewController.getReviewsByResidentId);
+reviewRouter.get("/rating/:residentId", reviewController.getAverageRatings);
 
 export default reviewRouter;

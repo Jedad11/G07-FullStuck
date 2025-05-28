@@ -122,5 +122,16 @@ export const residentController = {
       console.error('Error fetching resident:', error);
       return c.json({ message: 'Failed to fetch resident', error: (error as Error).message }, 500);
     }
+  },
+
+  ResidentWithAvgRating: async (c: Context) => {
+  try {
+    const residents = await residentModel.ResidentWithAvgRating();
+    return c.json(residents, 200);
+  } catch (error) {
+    console.error('Error fetching residents with avg rating:', error);
+    return c.json({ message: 'Failed to fetch residents', error: (error as Error).message }, 500);
   }
+}
+
 };

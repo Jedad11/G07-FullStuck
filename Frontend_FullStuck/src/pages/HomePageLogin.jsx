@@ -4,14 +4,48 @@ import Search from "../component/Search";
 import Room1 from "../image/room1.jpg";
 import Room2 from "../image/room2.jpg";
 import RecommendationRoom from "../component/RecommendationRoom";
+import * as residentAPI from "../api/residentAPI"
+import { useState, useEffect } from "react";
 
 function HomePageLogin() {
+
+  const [residents, setResidents] = useState([])
+  const handleFetchResidentsData = async () => {
+    try {
+      const response = await residentAPI.ResidentWithAvgRating();
+      let data = Array.isArray(response.data) ? response.data : [];
+
+      const sortedData = [...data].sort((a, b) => {
+        const ratingA = a.avgOverallRating;
+        const ratingB = b.avgOverallRating;
+
+        if (ratingA === null && ratingB === null) return 0;
+        if (ratingA === null) return 1; // null ไปท้าย
+        if (ratingB === null) return -1;
+
+        return ratingB - ratingA; // เปลี่ยนเป็นมาก → น้อย
+      });
+
+
+      setResidents(sortedData);
+      console.log(sortedData);
+
+    } catch (error) {
+      console.error("Error loading residents:", error);
+    }
+  }
+
+
+  useEffect(() => {
+    handleFetchResidentsData();
+  }, []);
+
   return (
     <>
       <Slider />
       <div className="container mx-auto flex justify-center rounded-xl ">
         <div className="bg-[#F3EAD3] mt-3 p-7 w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center lg:shadow-xl absolute md:z-30 lg:top-110 md:flex-row  ">
-          <Search /> 
+          <Search />
         </div>
       </div>
 
@@ -63,7 +97,8 @@ function HomePageLogin() {
         </div>
       </section>
 
-      <RecommendationRoom />
+      <RecommendationRoom topRatedRooms={residents.slice(0, 4)} />
+
     </>
   );
 }

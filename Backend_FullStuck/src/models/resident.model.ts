@@ -272,5 +272,51 @@ export const residentModel = {
         }
       }
     })
+  },
+
+  ResidentWithAvgRating: async () => {
+    // ดึง resident ทั้งหมด
+    const residents = await db.resident.findMany({
+      select: {
+        id: true,
+        residentName: true,
+        info: {
+          select: {
+            rentalPrice: true,
+            roomType: true,
+          },
+        },
+        address: {
+          select: {
+            houseNumber: true,
+            street: true,
+            subDistrict: true,
+            district: true,
+            province: true,
+            postalCode: true,
+          },
+        },
+      },
+    });
+
+    // ดึงค่า avg overallRating แยก residentId
+    const avgRatings = await db.review.groupBy({
+      by: ['residentId'],
+      _avg: {
+        overallRating: true,
+      },
+    });
+
+    // แปลง array เป็น map residentId -> avgRating
+    const ratingMap = new Map(avgRatings.map(r => [r.residentId, r._avg.overallRating]));
+
+    // ผนวก avgRating เข้า resident
+    const residentsWithAvgRating = residents.map(r => ({
+      ...r,
+      avgOverallRating: ratingMap.get(r.id) ?? null,
+    }));
+
+    return residentsWithAvgRating;
   }
+
 }

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import CheckIn from "./CheckIn";
-import CheckOut from "./CheckOut";
 import {AiOutlineSearch} from 'react-icons/ai'
 const Search = () => {
     const [input, setInput] = useState("")

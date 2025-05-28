@@ -215,7 +215,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/jedad/Desktop/csc105/G07-FullStuck/Backend_FullStuck/src/generated/prisma",
+      "value": "/Users/jedad/Desktop/G07-FullStuck/Backend_FullStuck/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -229,7 +229,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/jedad/Desktop/csc105/G07-FullStuck/Backend_FullStuck/prisma/schema.prisma",
+    "sourceFilePath": "/Users/jedad/Desktop/G07-FullStuck/Backend_FullStuck/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -243,12 +243,11 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "file:./FullStuck_Database.db"
       }
     }
   },

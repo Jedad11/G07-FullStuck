@@ -6,11 +6,11 @@ import * as residentAPI from "../api/residentAPI.js";
 
 function Recommend() {
   const [recommendedRooms, setRecommendedRooms] = useState([]);
-  const [sortType, setSortType] = useState("Lastest update");
+  const [sortType, setSortType] = useState("Highest rating");
 
   const handleFetchRecommended = async () => {
     try {
-      const response = await residentAPI.ResidentCard(); // เรียก API ที่คุณต้องการ
+      const response = await residentAPI.ResidentWithAvgRating();
       setRecommendedRooms(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Error loading recommended rooms:", error);
@@ -28,10 +28,21 @@ function Recommend() {
         return sorted.sort((a, b) => (b.info?.rentalPrice || 0) - (a.info?.rentalPrice || 0));
       case "Lowest price":
         return sorted.sort((a, b) => (a.info?.rentalPrice || 0) - (b.info?.rentalPrice || 0));
+      case "Highest rating":
       default:
-        return sorted;
+        return sorted.sort((a, b) => {
+          const ratingA = a.avgOverallRating;
+          const ratingB = b.avgOverallRating;
+
+          if (ratingA === null && ratingB === null) return 0;
+          if (ratingA === null) return 1;
+          if (ratingB === null) return -1;
+
+          return ratingB - ratingA;
+        });
     }
   }, [recommendedRooms, sortType]);
+
 
   return (
     <div className='md:max-w-[768px] xl:max-w-[1306px] mx-auto'>
@@ -57,6 +68,7 @@ function Recommend() {
               UnitType={info?.roomType || "N/A"}
               Address={fullAddress}
             />
+
           );
         })}
       </div>
