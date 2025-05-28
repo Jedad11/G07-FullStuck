@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 const IsLoginPopup = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -14,15 +13,10 @@ const IsLoginPopup = ({ isOpen, onClose }) => {
         <div className="flex justify-center space-x-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
+            className="bg-[#362518] text-white px-4 py-2 rounded hover:bg-[#554539] cursor-pointer"
           >
             Close
           </button>
-          <NavLink to="/">
-            <button className="bg-[#362518] text-white px-4 py-2 rounded hover:bg-[#554539]">
-              Back to Home
-            </button>
-          </NavLink>
         </div>
       </div>
     </div>
