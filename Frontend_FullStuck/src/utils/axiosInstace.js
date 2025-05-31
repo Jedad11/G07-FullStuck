@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Axios = axios.create({
-	baseURL: 'http://localhost:3000', //backend url
+	baseURL: 'http://localhost:3001', //backend url
 });
 
 export { Axios };
