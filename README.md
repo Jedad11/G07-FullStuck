@@ -128,3 +128,20 @@ All review-related endpoints start with `/reviews`
 
 ---
 
+## 📸 Screenshots
+
+Walkthrough of the main booking flow — register, sign in, browse listings, view a residence, reserve a room, and leave a review.
+
+| | |
+|---|---|
+| **Home page** | ![Home page](./screenshots/01-home.png) |
+| **Sign up** | ![Sign up](./screenshots/02-signup.png) |
+| **Sign in** | ![Sign in](./screenshots/03-signin.png) |
+| **Logged in** | ![Logged in](./screenshots/04-logged-in-home.png) |
+| **Condo listings** | ![Condo listings](./screenshots/05-condo-listing.png) |
+| **Residence detail** | ![Residence detail](./screenshots/06-resident-detail.png) |
+| **Booking form** | ![Booking form](./screenshots/07-booking-form.png) |
+| **Write a review** | ![Write a review](./screenshots/09-write-review.png) |
+
+---
+
